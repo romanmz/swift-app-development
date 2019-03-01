@@ -25,12 +25,14 @@ class MenuItemTableViewCell: UITableViewCell {
 		titleLabel.text = menuItem.name
 		priceLabel.text = String(format: "$%.2f", menuItem.price)
 		MenuController.shared.fetchImage(url: menuItem.imageURL) { (image) in
-			guard viewController.tableView.indexPath(for: self) == indexPath else { return }
-			if let image = image {
-				self.photoView.image = image
-			} else {
-				self.photoView.image = self.defaultImage
-			}
+			DispatchQueue.main.async {
+                guard viewController.tableView.indexPath(for: self) == indexPath else { return }
+                if let image = image {
+                    self.photoView.image = image
+                } else {
+                    self.photoView.image = self.defaultImage
+                }
+            }
 		}
 	}
 	

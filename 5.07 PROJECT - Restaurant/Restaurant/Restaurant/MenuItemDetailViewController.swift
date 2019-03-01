@@ -53,7 +53,10 @@ class MenuItemDetailViewController: UIViewController {
 		// Fetch photo
 		photoView.image = nil
 		MenuController.shared.fetchImage(url: menuItem.imageURL) { (photo) in
-			self.photoView.image = photo
+            guard let photo = photo else { return }
+            DispatchQueue.main.async {
+				self.photoView.image = photo
+            }
 		}
 	}
 	

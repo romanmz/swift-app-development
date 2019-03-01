@@ -51,15 +51,13 @@ class MenuController {
 		networkRequestBegan()
 		let url = baseURL.appendingPathComponent("categories")
 		let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-			DispatchQueue.main.async {
-				if let data = data,
-					let categoriesObject = try? self.decoder.decode(Categories.self, from: data) {
-					completion(categoriesObject.categories)
-				} else {
-					completion(nil)
-				}
-				self.networkRequestEnded()
+			if let data = data,
+				let categoriesObject = try? self.decoder.decode(Categories.self, from: data) {
+				completion(categoriesObject.categories)
+			} else {
+				completion(nil)
 			}
+			self.networkRequestEnded()
 		}
 		task.resume()
 	}
@@ -79,15 +77,13 @@ class MenuController {
 		// Request data
 		networkRequestBegan()
 		let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-			DispatchQueue.main.async {
-				if let data = data,
-					let menuItems = try? self.decoder.decode(MenuItems.self, from: data) {
-					completion(menuItems.items)
-				} else {
-					completion(nil)
-				}
-				self.networkRequestEnded()
+			if let data = data,
+				let menuItems = try? self.decoder.decode(MenuItems.self, from: data) {
+				completion(menuItems.items)
+			} else {
+				completion(nil)
 			}
+			self.networkRequestEnded()
 		}
 		task.resume()
 	}
@@ -112,15 +108,13 @@ class MenuController {
 		// Fetch data
 		networkRequestBegan()
 		let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-			DispatchQueue.main.async {
-				if let data = data,
-					let time = try? self.decoder.decode(PreparationTime.self, from: data) {
-					completion(time.prepTime)
-				} else {
-					completion(nil)
-				}
-				self.networkRequestEnded()
+			if let data = data,
+				let time = try? self.decoder.decode(PreparationTime.self, from: data) {
+				completion(time.prepTime)
+			} else {
+				completion(nil)
 			}
+			self.networkRequestEnded()
 		}
 		task.resume()
 	}
@@ -131,15 +125,13 @@ class MenuController {
 	func fetchImage(url: URL, completion: @escaping (UIImage?)->Void) {
 		networkRequestBegan()
 		let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-			DispatchQueue.main.async {
-				if let data = data,
-					let image = UIImage(data: data) {
-					completion(image)
-				} else {
-					completion(nil)
-				}
-				self.networkRequestEnded()
+			if let data = data,
+				let image = UIImage(data: data) {
+				completion(image)
+			} else {
+				completion(nil)
 			}
+			self.networkRequestEnded()
 		}
 		task.resume()
 	}

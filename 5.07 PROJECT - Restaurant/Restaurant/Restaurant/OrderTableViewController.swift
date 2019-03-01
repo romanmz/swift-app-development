@@ -101,12 +101,14 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	func submitOrder() {
 		let menuIds: [Int] = menuItems.map { $0.id }
 		MenuController.shared.submitOrder(menuIds: menuIds, completion: { (minutes) in
-			if let resultMinutes = minutes {
-				self.orderMinutes = resultMinutes
-				self.performSegue(withIdentifier: "OrderConfirmationSegue", sender: self)
-			} else {
-				self.errorAlert(title: "Network Error", message: "There was an error while trying to submit your order, please try again")
-			}
+            DispatchQueue.main.async {
+                if let resultMinutes = minutes {
+                    self.orderMinutes = resultMinutes
+                    self.performSegue(withIdentifier: "OrderConfirmationSegue", sender: self)
+                } else {
+                    self.errorAlert(title: "Network Error", message: "There was an error while trying to submit your order, please try again")
+                }
+            }
 		})
 	}
 	

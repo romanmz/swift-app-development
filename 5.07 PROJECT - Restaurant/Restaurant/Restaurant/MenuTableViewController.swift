@@ -19,22 +19,27 @@ class MenuTableViewController: UITableViewController {
 	
 	// Methods
 	// ------------------------------
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		self.title = category.capitalized
 		updateMenuList()
 	}
 	func updateMenuList() {
 		MenuController.shared.fetchMenuItems(for: category) { (menuItems) in
-			if let menuItems = menuItems {
-				self.menuItems = menuItems
-			} else {
-				self.menuItems.removeAll()
-				self.errorAlert(title: "Network Error", message: "There was an error while trying to fetch the list of menu items, please try again")
+			DispatchQueue.main.async {
+				self.updateUI(with: menuItems)
 			}
-			self.tableView.reloadData()
 		}
 	}
+    func updateUI(with menuItems: [MenuItem]?) {
+		if let menuItems = menuItems {
+			self.menuItems = menuItems
+		} else {
+			self.menuItems.removeAll()
+			self.errorAlert(title: "Network Error", message: "There was an error while trying to fetch the list of menu items, please try again")
+		}
+		self.tableView.reloadData()
+    }
 	
 	
 	// Table Cells

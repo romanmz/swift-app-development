@@ -29,15 +29,20 @@ class CategoryTableViewController: UITableViewController {
 	}
 	func updateCategoriesList() {
 		MenuController.shared.fetchCategories { (categories) in
-			if let categories = categories {
-				self.categories = categories
-			} else {
-				self.categories.removeAll()
-				self.errorAlert(title: "Network Error", message: "There was an error while trying to fetch the list of categories, please try again")
+			 DispatchQueue.main.async {
+				self.updateUI(with: categories)
 			}
-			self.tableView.reloadData()
 		}
 	}
+    func updateUI(with categories: [String]?) {
+		if let categories = categories {
+			self.categories = categories
+		} else {
+			self.categories.removeAll()
+			self.errorAlert(title: "Network Error", message: "There was an error while trying to fetch the list of categories, please try again")
+		}
+		self.tableView.reloadData()
+    }
 	
 	
 	// Table Cells
