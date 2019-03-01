@@ -45,6 +45,25 @@ class MenuController {
 	}
 	
 	
+	// State Restoration
+	// ------------------------------
+	var orderFileURL: URL {
+		get {
+			let documentsDirectoryURI = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+			return documentsDirectoryURI.appendingPathComponent("order").appendingPathExtension("json")
+		}
+	}
+	func loadOrder() {
+		guard let data = try? Data(contentsOf: self.orderFileURL) else { return }
+		order = (try? JSONDecoder().decode(Order.self, from: data)) ?? Order(menuItems:[])
+	}
+	func saveOrder() {
+		if let data = try? JSONEncoder().encode(order) {
+			try? data.write(to: self.orderFileURL)
+		}
+	}
+	
+	
 	// Fetch Categories
 	// ------------------------------
 	func fetchCategories(completion: @escaping ([String]?)->Void) {

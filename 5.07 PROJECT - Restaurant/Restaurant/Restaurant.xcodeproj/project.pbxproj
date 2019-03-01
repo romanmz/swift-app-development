@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		305B8B9222288A3700FA0BBE /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305B8B9122288A3700FA0BBE /* MenuController.swift */; };
 		30EB7D641F7CD7950003113E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB7D631F7CD7950003113E /* AppDelegate.swift */; };
 		30EB7D691F7CD7950003113E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30EB7D671F7CD7950003113E /* Main.storyboard */; };
 		30EB7D6B1F7CD7950003113E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30EB7D6A1F7CD7950003113E /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		305B8B9122288A3700FA0BBE /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		30EB7D601F7CD7950003113E /* Restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Restaurant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EB7D631F7CD7950003113E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30EB7D681F7CD7950003113E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,15 +74,16 @@
 			children = (
 				30EB7D6F1F7CD7950003113E /* Info.plist */,
 				30EB7D631F7CD7950003113E /* AppDelegate.swift */,
+				30EB7D751F7CD9BE0003113E /* CategoryTableViewController.swift */,
+				30EB7D811F7CDDC40003113E /* Helpers.swift */,
 				30EB7D7D1F7CDBA90003113E /* MenuItem.swift */,
 				30EB7D7F1F7CDCD20003113E /* IntermediaryModels.swift */,
-				30EB7D811F7CDDC40003113E /* Helpers.swift */,
-				30EB7D851F7E03180003113E /* MenuItemTableViewCell.swift */,
-				30EB7D751F7CD9BE0003113E /* CategoryTableViewController.swift */,
-				30EB7D771F7CD9DC0003113E /* MenuTableViewController.swift */,
+				305B8B9122288A3700FA0BBE /* MenuController.swift */,
 				30EB7D7B1F7CDB530003113E /* MenuItemDetailViewController.swift */,
-				30EB7D791F7CD9EE0003113E /* OrderTableViewController.swift */,
+				30EB7D851F7E03180003113E /* MenuItemTableViewCell.swift */,
+				30EB7D771F7CD9DC0003113E /* MenuTableViewController.swift */,
 				30EB7D831F7DCA560003113E /* OrderConfirmationViewController.swift */,
+				30EB7D791F7CD9EE0003113E /* OrderTableViewController.swift */,
 				30EB7D6A1F7CD7950003113E /* Assets.xcassets */,
 				30EB7D6C1F7CD7950003113E /* LaunchScreen.storyboard */,
 				30EB7D671F7CD7950003113E /* Main.storyboard */,
@@ -115,11 +118,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Roman Martinez";
 				TargetAttributes = {
 					30EB7D5F1F7CD7950003113E = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -165,6 +169,7 @@
 				30EB7D7A1F7CD9EE0003113E /* OrderTableViewController.swift in Sources */,
 				30EB7D861F7E03180003113E /* MenuItemTableViewCell.swift in Sources */,
 				30EB7D641F7CD7950003113E /* AppDelegate.swift in Sources */,
+				305B8B9222288A3700FA0BBE /* MenuController.swift in Sources */,
 				30EB7D7E1F7CDBA90003113E /* MenuItem.swift in Sources */,
 				30EB7D841F7DCA560003113E /* OrderConfirmationViewController.swift in Sources */,
 				30EB7D761F7CD9BE0003113E /* CategoryTableViewController.swift in Sources */,
@@ -209,6 +214,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -216,6 +222,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -266,6 +273,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -273,6 +281,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -312,7 +321,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.romanmz.Restaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -327,7 +336,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.romanmz.Restaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

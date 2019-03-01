@@ -32,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	// Hooks
 	// ------------------------------
+	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+		MenuController.shared.loadOrder()
+		return true
+	}
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
 		// Setup cache
@@ -42,11 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Badge Notifications
 		orderTabBarItem = (self.window!.rootViewController! as! UITabBarController).viewControllers![1].tabBarItem
 		NotificationCenter.default.addObserver(self, selector: #selector(updateOrderBadge), name: MenuController.orderUpdatedNotification, object: nil)
+		updateOrderBadge()
 		
 		return true
 	}
 	func applicationWillResignActive(_ application: UIApplication) {}
-	func applicationDidEnterBackground(_ application: UIApplication) {}
+	func applicationDidEnterBackground(_ application: UIApplication) {
+        MenuController.shared.saveOrder()
+    }
 	func applicationWillEnterForeground(_ application: UIApplication) {}
 	func applicationDidBecomeActive(_ application: UIApplication) {}
 	func applicationWillTerminate(_ application: UIApplication) {}
