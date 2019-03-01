@@ -34,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// ------------------------------
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 		MenuController.shared.loadOrder()
+		MenuController.shared.loadItems()
+		MenuController.shared.fetchMenu()
 		return true
 	}
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -53,8 +55,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillResignActive(_ application: UIApplication) {}
 	func applicationDidEnterBackground(_ application: UIApplication) {
         MenuController.shared.saveOrder()
+		MenuController.shared.saveItems()
     }
 	func applicationWillEnterForeground(_ application: UIApplication) {}
 	func applicationDidBecomeActive(_ application: UIApplication) {}
 	func applicationWillTerminate(_ application: UIApplication) {}
+	
+	
+	// Enable state restoration
+	// you need to manually add "restoration identifiers" to each controller where you want to save user state
+	func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+		return true
+	}
+	func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+		return true
+	}
 }

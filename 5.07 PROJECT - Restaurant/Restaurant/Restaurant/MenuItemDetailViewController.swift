@@ -9,18 +9,12 @@
 import UIKit
 
 
-protocol AddToOrderDelegate {
-	func added(item: MenuItem)
-}
-
-
 class MenuItemDetailViewController: UIViewController {
 	
 	
 	// Properties
 	// ------------------------------
-	var menuItem: MenuItem!
-	var delegate: AddToOrderDelegate?
+	var menuItem: MenuItem?
 	
 	// Outlets
 	@IBOutlet weak var photoView: UIImageView!
@@ -35,16 +29,22 @@ class MenuItemDetailViewController: UIViewController {
 	// ------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-		setupDelegate()
         addButton.layer.cornerRadius = 5.0
 		updateUI()
     }
-	func setupDelegate() {
-		guard let navController = tabBarController?.viewControllers?.last as? UINavigationController,
-			let orderController = navController.viewControllers.first as? OrderTableViewController else { return }
-		self.delegate = orderController
+	override func encodeRestorableState(with coder: NSCoder) {
+		super.encodeRestorableState(with: coder)
+		guard let menuItem = menuItem else { return }
+		coder.encode(menuItem.id, forKey: "menuItemId")
+	}
+	override func decodeRestorableState(with coder: NSCoder) {
+		super.decodeRestorableState(with: coder)
+		let menuItemId = Int(coder.decodeInt32(forKey: "menuItemId"))
+		menuItem = MenuController.shared.item(withID: menuItemId)!
+		updateUI()
 	}
 	func updateUI() {
+		guard let menuItem = menuItem else { return }
 		nameLabel.text = menuItem.name
 		categoryLabel.text = menuItem.category.capitalized
 		priceLabel.text = String(format: "$%.2f", menuItem.price)
@@ -64,11 +64,12 @@ class MenuItemDetailViewController: UIViewController {
 	// Actions
 	// ------------------------------
 	@IBAction func addToOrderButtonTapped(_ sender: UIButton) {
-		delegate?.added(item: menuItem)
+		guard let menuItem = menuItem else { return }
 		UIView.animate(withDuration: 0.3) {
 			self.addButton.transform = CGAffineTransform(scaleX: 3.0, y: 3.0)
 			self.addButton.transform = CGAffineTransform.identity
 		}
+		MenuController.shared.order.menuItems.append(menuItem)
 	}
 	
 	

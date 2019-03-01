@@ -15,12 +15,19 @@ class MenuController {
 	
 	// Properties
 	// ------------------------------
+	
+	// Static
 	static let shared = MenuController()
 	static let orderUpdatedNotification = Notification.Name("MenuController.orderUpdated")
+	static let menuDataUpdatedNotification = Notification.Name("MenuController.menuDataUpdated")
+	
+	// Instance
 	let baseURL = URL(string: "http://localhost:8090/")!
 	let decoder = JSONDecoder()
 	let encoder = JSONEncoder()
 	var pendingRequests = 0
+	
+	// Persistent data
 	var order = Order() {
 		didSet {
 			NotificationCenter.default.post(name: MenuController.orderUpdatedNotification, object: nil)
@@ -28,7 +35,7 @@ class MenuController {
 	}
 	
 	
-	// Methods
+	// Network Activity Indicator
 	// ------------------------------
 	private func networkRequestBegan() {
 		pendingRequests += 1
@@ -46,7 +53,39 @@ class MenuController {
 	}
 	
 	
-	// State Restoration
+	// Cache Categories
+	// ------------------------------
+	var categories: [String] {
+		get {
+			return itemsByCategory.keys.sorted()
+		}
+	}
+	
+	
+	// Cache Menu Items
+	// ------------------------------
+	private var itemsByID:[Int:MenuItem] = [:]
+	private var itemsByCategory:[String:[MenuItem]] = [:]
+	private func updateMenuItems(_ items: [MenuItem]) {
+		itemsByID.removeAll()
+		itemsByCategory.removeAll()
+		for item in items {
+			itemsByID[item.id] = item
+			itemsByCategory[item.category, default: []].append(item)
+		}
+		DispatchQueue.main.async {
+			NotificationCenter.default.post(name: MenuController.menuDataUpdatedNotification, object: nil)
+		}
+	}
+	func item(withID itemID: Int) -> MenuItem? {
+		return itemsByID[itemID]
+	}
+	func items(forCategory category: String) -> [MenuItem]? {
+		return itemsByCategory[category]
+	}
+	
+	
+	// Persistent Orders
 	// ------------------------------
 	var orderFileURL: URL {
 		get {
@@ -62,6 +101,45 @@ class MenuController {
 		if let data = try? self.encoder.encode(order) {
 			try? data.write(to: self.orderFileURL)
 		}
+	}
+	
+	
+	// Persistent Menu Items
+	// ------------------------------
+	var menuItemsFileURL: URL {
+		get {
+			let documentsDirectoryURI = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+			return documentsDirectoryURI.appendingPathComponent("menuItems").appendingPathExtension("json")
+		}
+	}
+	func loadItems() {
+		guard let data = try? Data(contentsOf: self.menuItemsFileURL) else { return }
+		let items = (try? self.decoder.decode([MenuItem].self, from: data)) ?? []
+		updateMenuItems(items)
+	}
+	func saveItems() {
+		let items = Array(itemsByID.values)
+		if let data = try? self.encoder.encode(items) {
+			try? data.write(to: self.menuItemsFileURL)
+		}
+	}
+	
+	
+	// Fetch Entire Menu
+	// ------------------------------
+	func fetchMenu() {
+		networkRequestBegan()
+		let initialMenuURL = baseURL.appendingPathComponent("menu")
+		let components = URLComponents(url: initialMenuURL, resolvingAgainstBaseURL: true)!
+		let menuURL = components.url!
+		let task = URLSession.shared.dataTask(with: menuURL) {
+			(data, _, _) in
+			if let data = data, let menuItems = try? self.decoder.decode(MenuItems.self, from: data) {
+				self.updateMenuItems(menuItems.items)
+			}
+			self.networkRequestEnded()
+		}
+		task.resume()
 	}
 	
 	

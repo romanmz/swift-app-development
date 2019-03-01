@@ -20,8 +20,14 @@ class CategoryTableViewController: UITableViewController {
 	// ------------------------------
 	override func viewDidLoad() {
         super.viewDidLoad()
-		updateCategoriesList()
+		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: MenuController.menuDataUpdatedNotification, object: nil)
+		updateUI()
 	}
+	@objc func updateUI() {
+		categories = MenuController.shared.categories
+		self.tableView.reloadData()
+    }
+	/*
 	override func viewDidAppear(_ animated: Bool) {
 		if categories.isEmpty {
 			updateCategoriesList()
@@ -29,12 +35,12 @@ class CategoryTableViewController: UITableViewController {
 	}
 	func updateCategoriesList() {
 		MenuController.shared.fetchCategories { (categories) in
-			 DispatchQueue.main.async {
+			DispatchQueue.main.async {
 				self.updateUI(with: categories)
 			}
 		}
 	}
-    func updateUI(with categories: [String]?) {
+	func updateUI(with categories: [String]?) {
 		if let categories = categories {
 			self.categories = categories
 		} else {
@@ -42,7 +48,7 @@ class CategoryTableViewController: UITableViewController {
 			self.errorAlert(title: "Network Error", message: "There was an error while trying to fetch the list of categories, please try again")
 		}
 		self.tableView.reloadData()
-    }
+	*/
 	
 	
 	// Table Cells

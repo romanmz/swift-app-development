@@ -13,7 +13,7 @@ class MenuTableViewController: UITableViewController {
 	
 	// Properties
 	// ------------------------------
-	var category: String!
+	var category: String?
 	var menuItems: [MenuItem] = []
 	
 	
@@ -21,9 +21,26 @@ class MenuTableViewController: UITableViewController {
 	// ------------------------------
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.title = category.capitalized
-		updateMenuList()
+		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: MenuController.menuDataUpdatedNotification, object: nil)
+		updateUI()
 	}
+	override func encodeRestorableState(with coder: NSCoder) {
+		super.encodeRestorableState(with: coder)
+		guard let category = category else { return }
+		coder.encode(category, forKey: "category")
+	}
+	override func decodeRestorableState(with coder: NSCoder) {
+		super.decodeRestorableState(with: coder)
+		category = coder.decodeObject(forKey: "category") as? String
+		updateUI()
+	}
+	@objc func updateUI() {
+		guard let category = category else { return }
+		title = category.capitalized
+		menuItems = MenuController.shared.items(forCategory: category) ?? []
+		tableView.reloadData()
+	}
+	/*
 	func updateMenuList() {
 		MenuController.shared.fetchMenuItems(for: category) { (menuItems) in
 			DispatchQueue.main.async {
@@ -40,6 +57,7 @@ class MenuTableViewController: UITableViewController {
 		}
 		self.tableView.reloadData()
     }
+	*/
 	
 	
 	// Table Cells

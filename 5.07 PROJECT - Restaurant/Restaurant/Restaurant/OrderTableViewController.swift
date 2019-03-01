@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OrderTableViewController: UITableViewController, AddToOrderDelegate {
+class OrderTableViewController: UITableViewController {
 	
 	
 	// Properties
@@ -72,14 +72,6 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 			updateUI()
         }
     }
-	
-	
-	// Adding Items
-	// ------------------------------
-	func added(item: MenuItem) {
-		MenuController.shared.order.menuItems.append(item)
-		updateUI()
-	}
 	
 	
 	// Submitting Orders
