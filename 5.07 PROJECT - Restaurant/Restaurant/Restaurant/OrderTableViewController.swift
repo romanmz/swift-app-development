@@ -100,7 +100,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	}
 	func submitOrder() {
 		let menuIds: [Int] = menuItems.map { $0.id }
-		NetworkRequests.shared.submitOrder(menuIds: menuIds, completion: { (minutes) in
+		MenuController.shared.submitOrder(menuIds: menuIds, completion: { (minutes) in
 			if let resultMinutes = minutes {
 				self.orderMinutes = resultMinutes
 				self.performSegue(withIdentifier: "OrderConfirmationSegue", sender: self)

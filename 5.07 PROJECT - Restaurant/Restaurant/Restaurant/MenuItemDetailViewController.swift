@@ -52,7 +52,7 @@ class MenuItemDetailViewController: UIViewController {
 		
 		// Fetch photo
 		photoView.image = nil
-		NetworkRequests.shared.fetchImage(url: menuItem.imageURL) { (photo) in
+		MenuController.shared.fetchImage(url: menuItem.imageURL) { (photo) in
 			self.photoView.image = photo
 		}
 	}

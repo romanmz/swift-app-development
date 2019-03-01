@@ -25,7 +25,7 @@ class MenuTableViewController: UITableViewController {
 		updateMenuList()
 	}
 	func updateMenuList() {
-		NetworkRequests.shared.fetchMenuItems(for: category) { (menuItems) in
+		MenuController.shared.fetchMenuItems(for: category) { (menuItems) in
 			if let menuItems = menuItems {
 				self.menuItems = menuItems
 			} else {

@@ -24,7 +24,7 @@ class MenuItemTableViewCell: UITableViewCell {
 	func update(with menuItem: MenuItem, at indexPath: IndexPath, in viewController: UITableViewController) {
 		titleLabel.text = menuItem.name
 		priceLabel.text = String(format: "$%.2f", menuItem.price)
-		NetworkRequests.shared.fetchImage(url: menuItem.imageURL) { (image) in
+		MenuController.shared.fetchImage(url: menuItem.imageURL) { (image) in
 			guard viewController.tableView.indexPath(for: self) == indexPath else { return }
 			if let image = image {
 				self.photoView.image = image

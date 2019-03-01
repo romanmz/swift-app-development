@@ -20,12 +20,12 @@ extension UIViewController {
 }
 
 
-class NetworkRequests {
+class MenuController {
 	
 	
 	// Properties
 	// ------------------------------
-	static let shared = NetworkRequests()
+	static let shared = MenuController()
 	let baseURL = URL(string: "http://localhost:8090/")!
 	let decoder = JSONDecoder()
 	var pendingRequests = 0

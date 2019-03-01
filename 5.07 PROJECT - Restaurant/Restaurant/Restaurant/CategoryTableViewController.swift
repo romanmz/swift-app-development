@@ -28,7 +28,7 @@ class CategoryTableViewController: UITableViewController {
 		}
 	}
 	func updateCategoriesList() {
-		NetworkRequests.shared.fetchCategories { (categories) in
+		MenuController.shared.fetchCategories { (categories) in
 			if let categories = categories {
 				self.categories = categories
 			} else {
