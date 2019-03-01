@@ -30,11 +30,9 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 		if MenuController.shared.order.menuItems.count > 0 {
 			submitButton.isEnabled = true
 			editButtonItem.isEnabled = true
-			navigationController?.tabBarItem.badgeValue = "\(MenuController.shared.order.menuItems.count)"
 		} else {
 			submitButton.isEnabled = false
 			editButtonItem.isEnabled = false
-			navigationController?.tabBarItem.badgeValue = nil
 		}
 	}
 	

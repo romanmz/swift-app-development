@@ -26,10 +26,15 @@ class MenuController {
 	// Properties
 	// ------------------------------
 	static let shared = MenuController()
+	static let orderUpdatedNotification = Notification.Name("MenuController.orderUpdated")
 	let baseURL = URL(string: "http://localhost:8090/")!
 	let decoder = JSONDecoder()
 	var pendingRequests = 0
-	var order = Order()
+	var order = Order() {
+		didSet {
+			NotificationCenter.default.post(name: MenuController.orderUpdatedNotification, object: nil)
+		}
+	}
 	
 	
 	// Methods
