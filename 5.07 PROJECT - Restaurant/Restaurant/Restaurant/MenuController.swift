@@ -31,12 +31,16 @@ class MenuController {
 	// ------------------------------
 	private func networkRequestBegan() {
 		pendingRequests += 1
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		DispatchQueue.main.async {
+			UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		}
 	}
 	private func networkRequestEnded() {
 		pendingRequests -= 1
 		if pendingRequests <= 0 {
-			UIApplication.shared.isNetworkActivityIndicatorVisible = false
+			DispatchQueue.main.async {
+				UIApplication.shared.isNetworkActivityIndicatorVisible = false
+			}
 		}
 	}
 	
