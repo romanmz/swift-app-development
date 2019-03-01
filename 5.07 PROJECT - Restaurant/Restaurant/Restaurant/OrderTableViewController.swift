@@ -24,6 +24,8 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.navigationItem.leftBarButtonItem = self.editButtonItem
+		// Auto refresh when order instance is updated
+		NotificationCenter.default.addObserver(tableView, selector: #selector(UITableView.reloadData), name: MenuController.orderUpdatedNotification, object: nil)
 		updateUI()
     }
 	func updateUI() {
@@ -67,7 +69,6 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 			MenuController.shared.order.menuItems.remove(at: indexPath.row)
-			tableView.deleteRows(at: [indexPath], with: .fade)
 			updateUI()
         }
     }
@@ -76,9 +77,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	// Adding Items
 	// ------------------------------
 	func added(item: MenuItem) {
-		let newIndex = IndexPath(row: MenuController.shared.order.menuItems.count, section: 0)
 		MenuController.shared.order.menuItems.append(item)
-		tableView.insertRows(at: [newIndex], with: .automatic)
 		updateUI()
 	}
 	
@@ -122,7 +121,6 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	@IBAction func unwindToOrderView(segue: UIStoryboardSegue) {
 		if segue.identifier == "DismissConfirmation" {
 			MenuController.shared.order.menuItems.removeAll()
-			tableView.reloadData()
 			updateUI()
 		}
 	}
