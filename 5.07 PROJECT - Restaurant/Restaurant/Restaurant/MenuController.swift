@@ -19,6 +19,7 @@ class MenuController {
 	static let orderUpdatedNotification = Notification.Name("MenuController.orderUpdated")
 	let baseURL = URL(string: "http://localhost:8090/")!
 	let decoder = JSONDecoder()
+	let encoder = JSONEncoder()
 	var pendingRequests = 0
 	var order = Order() {
 		didSet {
@@ -58,7 +59,7 @@ class MenuController {
 		order = (try? JSONDecoder().decode(Order.self, from: data)) ?? Order(menuItems:[])
 	}
 	func saveOrder() {
-		if let data = try? JSONEncoder().encode(order) {
+		if let data = try? self.encoder.encode(order) {
 			try? data.write(to: self.orderFileURL)
 		}
 	}
@@ -120,8 +121,7 @@ class MenuController {
 		
 		// Prepare data to be sent
 		let data: [String: [Int]] = ["menuIds": menuIds]
-		let jsonEncoder = JSONEncoder()
-		let jsonData = try? jsonEncoder.encode(data)
+		let jsonData = try? self.encoder.encode(data)
 		request.httpBody = jsonData
 		
 		// Fetch data
