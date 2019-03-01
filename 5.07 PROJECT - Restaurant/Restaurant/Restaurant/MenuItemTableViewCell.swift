@@ -32,6 +32,7 @@ class MenuItemTableViewCell: UITableViewCell {
                 } else {
                     self.photoView.image = self.defaultImage
                 }
+                self.setNeedsLayout()
             }
 		}
 	}

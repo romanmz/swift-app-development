@@ -36,6 +36,7 @@ class MenuItemDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupDelegate()
+        addButton.layer.cornerRadius = 5.0
 		updateUI()
     }
 	func setupDelegate() {
@@ -48,7 +49,6 @@ class MenuItemDetailViewController: UIViewController {
 		categoryLabel.text = menuItem.category.capitalized
 		priceLabel.text = String(format: "$%.2f", menuItem.price)
 		descriptionLabel.text = menuItem.description
-		addButton.layer.cornerRadius = 3.0
 		
 		// Fetch photo
 		photoView.image = nil
