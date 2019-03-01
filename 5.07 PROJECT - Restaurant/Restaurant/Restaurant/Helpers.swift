@@ -29,6 +29,7 @@ class MenuController {
 	let baseURL = URL(string: "http://localhost:8090/")!
 	let decoder = JSONDecoder()
 	var pendingRequests = 0
+	var order = Order()
 	
 	
 	// Methods

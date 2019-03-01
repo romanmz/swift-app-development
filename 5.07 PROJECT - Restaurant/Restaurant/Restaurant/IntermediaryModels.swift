@@ -19,3 +19,11 @@ struct PreparationTime: Codable {
 		case prepTime = "preparation_time"
 	}
 }
+
+struct Order: Codable {
+    var menuItems: [MenuItem]
+    
+    init(menuItems: [MenuItem] = []) {
+        self.menuItems = menuItems
+    }
+}

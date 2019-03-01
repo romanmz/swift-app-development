@@ -13,7 +13,6 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	
 	// Properties
 	// ------------------------------
-	var menuItems: [MenuItem] = []
 	var orderMinutes: Int?
 	
 	// Outlets
@@ -28,10 +27,10 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 		updateUI()
     }
 	func updateUI() {
-		if menuItems.count > 0 {
+		if MenuController.shared.order.menuItems.count > 0 {
 			submitButton.isEnabled = true
 			editButtonItem.isEnabled = true
-			navigationController?.tabBarItem.badgeValue = "\(menuItems.count)"
+			navigationController?.tabBarItem.badgeValue = "\(MenuController.shared.order.menuItems.count)"
 		} else {
 			submitButton.isEnabled = false
 			editButtonItem.isEnabled = false
@@ -46,11 +45,11 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuItems.count
+        return MenuController.shared.order.menuItems.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItemCell", for: indexPath) as! MenuItemTableViewCell
-		let menuItem = menuItems[indexPath.row]
+		let menuItem = MenuController.shared.order.menuItems[indexPath.row]
 		cell.update(with: menuItem, at: indexPath, in: self)
 		return cell
     }
@@ -69,7 +68,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
     }
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-			menuItems.remove(at: indexPath.row)
+			MenuController.shared.order.menuItems.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .fade)
 			updateUI()
         }
@@ -79,8 +78,8 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	// Adding Items
 	// ------------------------------
 	func added(item: MenuItem) {
-		let newIndex = IndexPath(row: menuItems.count, section: 0)
-		menuItems.append(item)
+		let newIndex = IndexPath(row: MenuController.shared.order.menuItems.count, section: 0)
+		MenuController.shared.order.menuItems.append(item)
 		tableView.insertRows(at: [newIndex], with: .automatic)
 		updateUI()
 	}
@@ -89,7 +88,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	// Submitting Orders
 	// ------------------------------
 	@IBAction func submitButtonTapped(_ sender: UIBarButtonItem) {
-		let totalCost: Double = menuItems.reduce(0) { $0 + $1.price }
+		let totalCost: Double = MenuController.shared.order.menuItems.reduce(0) { $0 + $1.price }
 		let formattedCost = String(format: "$%.2f", totalCost)
 		let alert = UIAlertController(title: "Confirm Order", message: "You are about to submit your order with a total of \(formattedCost)", preferredStyle: .alert)
 		let submitAction = UIAlertAction(title: "Submit", style: .default) { (alertAction) in self.submitOrder() }
@@ -99,7 +98,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 		present(alert, animated: true, completion: nil)
 	}
 	func submitOrder() {
-		let menuIds: [Int] = menuItems.map { $0.id }
+		let menuIds: [Int] = MenuController.shared.order.menuItems.map { $0.id }
 		MenuController.shared.submitOrder(menuIds: menuIds, completion: { (minutes) in
             DispatchQueue.main.async {
                 if let resultMinutes = minutes {
@@ -124,7 +123,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 	}
 	@IBAction func unwindToOrderView(segue: UIStoryboardSegue) {
 		if segue.identifier == "DismissConfirmation" {
-			menuItems.removeAll()
+			MenuController.shared.order.menuItems.removeAll()
 			tableView.reloadData()
 			updateUI()
 		}
