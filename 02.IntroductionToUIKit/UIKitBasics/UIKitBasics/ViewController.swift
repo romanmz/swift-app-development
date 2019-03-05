@@ -18,6 +18,13 @@ class ViewController: UIViewController {
 	}
 	
 	
+	// Basic UI elements
+	// ------------------------------
+	// UILabel
+	// UIImageView
+	// UITextView
+	
+	
 	// Input controls
 	// ------------------------------
 	@IBAction func buttonPressed(_ sender: UIButton) {
@@ -57,6 +64,15 @@ class ViewController: UIViewController {
 		let location = sender.location(in: view)
 		print("Single tap gesture on: \(location)")
 	}
+	
+	
+	// Scroll View
+	// ------------------------------
+	// To get the stupid UIScrollView element to work properly:
+	// 1. Add it as a child of UIView and align it to all 4 edges
+	// 2. Add a child UIView (optionally named "Content View") inside UIScrollView, and also align all 4 edges
+	// 3. To disable horizontal scrolling, add a constraint to Content View so it always matches the scroll view's width (or height to disable vertical scrolling)
+	// 4. All elements within the content view should have constraints to make it so that the content view has defined constraints edge to edge, both horizontally and vertically
 	
 	
 }
