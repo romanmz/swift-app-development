@@ -70,9 +70,15 @@ class ViewController: UIViewController {
 	// ------------------------------
 	// To get the stupid UIScrollView element to work properly:
 	// 1. Add it as a child of UIView and align it to all 4 edges
-	// 2. Add a child UIView (optionally named "Content View") inside UIScrollView, align all 4 edges, and set constraints to match both width and height
-	// 3. To enable vertical scrolling set the height constraint to be >= instead of just =, do the same to the width constraint for horizontal scrolling
+	// 2. Add a child UIView (optionally named "Content View") inside UIScrollView, align all 4 edges
+	// 3. To prevent horizontal scrolling add a width constraint so that the content view always matches the scroll view (or a height constraint to prevent vertical scrolling)
 	// 4. All elements within the content view should have constraints to make it so that the content view has defined constraints edge to edge, both horizontally and vertically
+	
+	
+	// Constraints and Stack Views
+	// ------------------------------
+	// Use Constraints/AutoLayout to determine how elements should be placed relative to the screen and to each other
+	// The UIStackView element lets you group items and more easily apply alignment and distribution rules to them
 	
 	
 }
