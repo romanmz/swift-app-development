@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 	
 	// UINavigationBar
 	// ------------------------------
-	// This elements adds a static grey or coloured bar at the top of the view
+	// This element adds a static grey or coloured bar at the top of the view
 	// - A navigation bar element will be added automatically to the navigation controller on the IB, you can't delete it
 	// - This bar will be displayed automatically on the root view (always), and on any additional views loaded using segues (only for type "Show (e.g. Push)")
 	

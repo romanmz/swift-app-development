@@ -9,12 +9,23 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+	
+	
+	// Example: Clear the badge after 1 second of viewing the view
+	// ------------------------------
+	var badgeToBeCleared = false
+	override func viewDidAppear(_ animated: Bool) {
+		badgeToBeCleared = true
+		DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: clearBadge)
 	}
-
-
+	override func viewWillDisappear(_ animated: Bool) {
+		badgeToBeCleared = false
+	}
+	func clearBadge() {
+		if badgeToBeCleared {
+			self.tabBarItem.badgeValue = nil
+		}
+	}
+	
+	
 }
-
