@@ -9,14 +9,28 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+	
+	
+	// UIViewController Events
+	// ------------------------------
+	
+	// Runs when the view element is loaded into memory
+	// do any additional setup after loading the view, typically from a nib
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
-		// ++++++++++++++++++++++++++++++
 		testOutput()
 		testBreakpoints()
 	}
+	
+	// Triggered when the app is running out of memory
+	// use it to dispose of any resources that can be easily re-created
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+	}
+	
+	
+	// Debugging
+	// ------------------------------
 	
 	// Use the 'print' method to output debugging text to the console
 	func testOutput() {
@@ -31,12 +45,9 @@ class ViewController: UIViewController {
 		names.removeFirst()
 	}
 	
-	// Triggered when the app is running out of memory
-	// use it to dispose of any resources that can be easily re-created
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-	}
 	
+	// Interface Builder
+	// ------------------------------
 	// ctrl+drag elements into a class to add outlets (weak references to the elements)
 	// or actions (events triggered when the user interacts with the items on the UI)
 	// this way you can set up elements visually using storyboards (Interface Builder), while also allowing you to add functionality programmatically
@@ -48,4 +59,12 @@ class ViewController: UIViewController {
 		mainLabel.text = "Lorem ipsum dolor sit amet"
 		mainButton.setTitleColor(.red, for: .normal)
 	}
+	
+	
+	// Info.plist
+	// ------------------------------
+	// Supported Interface Orientations: Lets you control which orientations are supported on phones and tables
+	// the UI will rotate to fit a new device orientation only if that orientation is included on this list
+	
+	
 }
