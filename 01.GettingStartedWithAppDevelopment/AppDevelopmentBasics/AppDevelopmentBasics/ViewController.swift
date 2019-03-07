@@ -11,16 +11,37 @@ import UIKit
 class ViewController: UIViewController {
 	
 	
-	// UIViewController Events
+	// UIViewController Life Cycle
 	// ------------------------------
 	
-	// Runs when the view element is loaded into memory
-	// do any additional setup after loading the view, typically from a nib
+	// Runs when the view element is first loaded into memory
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		testOutput()
 		testBreakpoints()
 	}
+	
+	// When presenting the view (e.g. on first load, or when navigating to it from another view)
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+	}
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+	}
+	
+	// When navigating out of the view
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+	}
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+	}
+	
+	// When switching between views:
+	// view 2: viewWillAppear
+	// view 1: viewWillDisappear
+	// view 1: viewDidDisappear
+	// view 2: viewDidAppear
 	
 	// Triggered when the app is running out of memory
 	// use it to dispose of any resources that can be easily re-created
