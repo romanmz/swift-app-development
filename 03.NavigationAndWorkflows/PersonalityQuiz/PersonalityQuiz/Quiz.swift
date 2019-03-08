@@ -44,13 +44,8 @@ class Quiz {
 		return questions.count
 	}
 	
-	
-	// Constructor
-	// ------------------------------
-	init(_ questions: [Question]) {
-		self.questions = questions
-	}
-	func calculateResult() -> AnimalType {
+	// Current result
+	var currentResult: AnimalType {
 		var frequencyOfTypes: [AnimalType: Int] = [:]
 		let selectedTypes = answersChosen.map { $0.type }
 		for type in selectedTypes {
@@ -58,6 +53,13 @@ class Quiz {
 		}
 		let mostCommonType = frequencyOfTypes.sorted { $0.value > $1.value }.first!.key
 		return mostCommonType
+	}
+	
+	
+	// Constructor
+	// ------------------------------
+	init(_ questions: [Question]) {
+		self.questions = questions
 	}
 	
 	
@@ -75,8 +77,7 @@ class Quiz {
 		delegate?.presentQuestion(currentQuestion)
 	}
 	func finishedQuiz() {
-		let result = calculateResult()
-		delegate?.finishedQuiz(result)
+		delegate?.finishedQuiz(currentResult)
 	}
 	
 	

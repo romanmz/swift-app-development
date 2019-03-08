@@ -169,6 +169,12 @@ class QuestionsViewController: UIViewController, QuizDelegate {
 		updateUI()
 	}
 	func finishedQuiz(_ result: AnimalType) {
+		performSegue(withIdentifier: "showResultsSegue", sender: nil)
+	}
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard segue.identifier == "showResultsSegue",
+			let resultsView = segue.destination as? ResultsViewController else { return }
+		resultsView.result = quiz.currentResult
 	}
 	
 	

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30623FA122320B9B00173821 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30623FA022320B9B00173821 /* ResultsViewController.swift */; };
 		30ED1D602231CC21001E629D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED1D5F2231CC21001E629D /* AppDelegate.swift */; };
 		30ED1D652231CC21001E629D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ED1D632231CC21001E629D /* Main.storyboard */; };
 		30ED1D672231CC21001E629D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ED1D662231CC21001E629D /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30623FA022320B9B00173821 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		30ED1D5C2231CC21001E629D /* PersonalityQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalityQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ED1D5F2231CC21001E629D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30ED1D642231CC21001E629D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				30ED1D5F2231CC21001E629D /* AppDelegate.swift */,
 				30ED1D712231CE96001E629D /* IntroViewController.swift */,
 				30ED1D792231D817001E629D /* QuestionsViewController.swift */,
+				30623FA022320B9B00173821 /* ResultsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				30ED1D722231CE96001E629D /* IntroViewController.swift in Sources */,
 				30ED1D762231D4EE001E629D /* Quiz.swift in Sources */,
 				30ED1D602231CC21001E629D /* AppDelegate.swift in Sources */,
+				30623FA122320B9B00173821 /* ResultsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
