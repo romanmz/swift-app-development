@@ -11,6 +11,31 @@ import UIKit
 class ViewController: UIViewController {
 	
 	
+	// App Life Cycle
+	// ------------------------------
+	
+	// Counters
+	var appLaunched = 0
+	var appResignedActive = 0
+	var appEnteredBackground = 0
+	var appEnteredForeground = 0
+	var appBecomeActive = 0
+	var appTerminated = 0
+	
+	// Update labels
+	@IBOutlet weak var lifecycleLabels: UILabel!
+	func updateLifecycleLabels() {
+		lifecycleLabels.text = """
+		App launched: \(appLaunched) times
+		App resigned active: \(appResignedActive) times
+		App entered background: \(appEnteredBackground) times
+		App entered foreground: \(appEnteredForeground) times
+		App became active: \(appBecomeActive) times
+		App terminated: \(appTerminated) times
+		"""
+	}
+	
+	
 	// UIViewController Life Cycle
 	// ------------------------------
 	
@@ -19,6 +44,7 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		testOutput()
 		testBreakpoints()
+		updateLifecycleLabels()
 	}
 	
 	// When presenting the view (e.g. on first load, or when navigating to it from another view)
