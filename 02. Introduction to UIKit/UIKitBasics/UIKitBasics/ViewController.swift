@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIScrollViewDelegate {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -16,6 +16,7 @@ class ViewController: UIViewController {
 		// ++++++++++++++++++++++++++++++
 		programmaticEvents()
 		keyboardDetection()
+		enableScrollViewZooming()
 	}
 	
 	
@@ -101,6 +102,22 @@ class ViewController: UIViewController {
 		let contentInsets = UIEdgeInsets.zero
 		scrollBox.contentInset = contentInsets
 		scrollBox.scrollIndicatorInsets = contentInsets
+	}
+	
+	
+	// Zooming in/out
+	// By default a UIScrollView element doesn't allow users to zoom in or out on the content, but you have the option to enable it:
+	// 1. Create an class that conforms to the UIScrollViewDelegate protocol, and assign it to the "delegate" property of the scroll view
+	// 2. Call the delegate method "viewForZooming" and return the element within the scroll view that will have the zoom applied to
+	// 3. Change the value of the property minimumZoomScale and/or maximumZoomScale, as both equal 1.0 by default
+	@IBOutlet weak var scrollContentBox: UIView!
+	func enableScrollViewZooming() {
+		scrollBox.delegate = self
+		scrollBox.minimumZoomScale = 0.5
+		scrollBox.maximumZoomScale = 2.0
+	}
+	func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+		return scrollContentBox
 	}
 	
 	
