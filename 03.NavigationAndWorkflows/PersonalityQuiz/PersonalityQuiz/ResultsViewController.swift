@@ -22,6 +22,11 @@ class ResultsViewController: UIViewController {
 	// ------------------------------
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		// Disable "back" button
+		navigationItem.hidesBackButton = true
+		
+		// Update content
 		titleLabel.text = "You are a \(result.rawValue)"
 		descriptionLabel.text = result.definition
 	}

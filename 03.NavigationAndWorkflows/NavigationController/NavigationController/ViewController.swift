@@ -47,6 +47,8 @@ class ViewController: UIViewController {
 	// UIBarButtonItem
 	// ------------------------------
 	// This is the class used for buttons included on the navigation item
+	// - The "Back" button on the left is generated automatically
+	// - To add another button on the right, manually search for it in the items library and drop it into the navigation bar
 	
 	
 	// Segues
@@ -63,6 +65,14 @@ class ViewController: UIViewController {
 	// - if you want to send data from the source view to the destination view, override the "prepare(for:sender:)" view controller method
 	//   remember to check the segue.identifier property to make sure you're targeting the correct segue
 	//   and access the target view controller instance with the segue.destination property
+	
+	
+	// Unwind Segues
+	// ------------------------------
+	// To set up an unwinding segue:
+	// 1. Create an @IBAction function on the target view controller, the function should take a "segue" argument of type "UIStoryboardSegue"
+	// 2. ctrl+click the element that should trigger the unwinding segue, and drop it into the "Exit" element of its view controller
+	// 3. You'll see a list of unwind function available on your project, pick the one you want to use
 	
 	
 	// Example

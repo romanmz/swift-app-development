@@ -14,4 +14,10 @@ class IntroViewController: UIViewController {
 		super.viewDidLoad()
 	}
 	
+	
+	// Unwind segue
+	// ------------------------------
+	@IBAction func unwindToIntroduction(segue: UIStoryboardSegue) {}
+	
+	
 }

@@ -333,12 +333,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yvB-XI-Scs"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Results" id="V5a-5c-1Nw">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Shw-Ip-F0d">
+                            <connections>
+                                <segue destination="T3K-Ui-1RP" kind="unwind" unwindAction="unwindToIntroductionWithSegue:" id="Ij1-5W-PYw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="descriptionLabel" destination="QYN-Xw-XNi" id="mkj-iD-hfM"/>
                         <outlet property="titleLabel" destination="geh-9U-TmU" id="Fve-CR-8UT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OJa-Rh-4Oq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="T3K-Ui-1RP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2263" y="27"/>
         </scene>

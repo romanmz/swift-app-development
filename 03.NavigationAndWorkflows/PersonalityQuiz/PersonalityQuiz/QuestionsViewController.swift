@@ -117,6 +117,9 @@ class QuestionsViewController: UIViewController, QuizDelegate {
 	func updateUI() {
 		let question = quiz.currentQuestion
 		
+		// Update view title
+		navigationItem.title = "Question #\(quiz.currentQuestionNumber)"
+		
 		// Hide all containers
 		singleAnswerBox.isHidden = true
 		multipleAnswersBox.isHidden = true
