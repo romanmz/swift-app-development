@@ -15,6 +15,7 @@ class ViewController: UIViewController {
 		// Do any additional setup after loading the view, typically from a nib.
 		// ++++++++++++++++++++++++++++++
 		programmaticEvents()
+		keyboardDetection()
 	}
 	
 	
@@ -66,6 +67,16 @@ class ViewController: UIViewController {
 	}
 	
 	
+	// Keyboard Detection
+	// ------------------------------
+	// Observe the ".UIResponder.keyboardDidShowNotification" and ".UIResponder.keyboardWillHideNotification" notifications
+	// to make changes to your views whenever the keyboard appears/disappears
+	func keyboardDetection() {
+		NotificationCenter.default.addObserver(self, selector: #selector( keyboardWasShown(_:) ), name: UIResponder.keyboardDidShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector( keyboardWillBeHidden(_:) ), name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
+	
 	// Scroll View
 	// ------------------------------
 	// To get the stupid UIScrollView element to work properly:
@@ -73,6 +84,24 @@ class ViewController: UIViewController {
 	// 2. Add a child UIView (optionally named "Content View") inside UIScrollView, align all 4 edges
 	// 3. To prevent horizontal scrolling add a width constraint so that the content view always matches the scroll view (or a height constraint to prevent vertical scrolling)
 	// 4. All elements within the content view should have constraints to make it so that the content view has defined constraints edge to edge, both horizontally and vertically
+	
+	// You can dynamically edit the visible content area, and the scroll indicators by editing the "contentInset" and "scrollIndicatorInsets" properties
+	// Example, adjusting the box when the keyboard appears/disappears:
+	@IBOutlet weak var scrollBox: UIScrollView!
+	@objc func keyboardWasShown(_ notificiation: NSNotification) {
+		guard let info = notificiation.userInfo,
+			let keyboardFrameValue = info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
+		let keyboardFrame = keyboardFrameValue.cgRectValue
+		let keyboardSize = keyboardFrame.size
+		let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+		scrollBox.contentInset = contentInsets
+		scrollBox.scrollIndicatorInsets = contentInsets
+	}
+	@objc func keyboardWillBeHidden(_ notification: NSNotification) {
+		let contentInsets = UIEdgeInsets.zero
+		scrollBox.contentInset = contentInsets
+		scrollBox.scrollIndicatorInsets = contentInsets
+	}
 	
 	
 	// Constraints and Stack Views

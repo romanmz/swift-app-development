@@ -180,6 +180,7 @@
                     </view>
                     <connections>
                         <outlet property="button" destination="dJd-n0-00F" id="VFT-kR-MZd"/>
+                        <outlet property="scrollBox" destination="l9R-bq-92K" id="Y23-NV-mRB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
