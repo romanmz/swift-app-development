@@ -13,6 +13,8 @@
 		3084252A2233080F00A6C3DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 308425282233080F00A6C3DB /* LaunchScreen.storyboard */; };
 		30842532223439F500A6C3DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30842531223439F500A6C3DB /* TableViewController.swift */; };
 		3084253422343DB600A6C3DB /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3084253322343DB600A6C3DB /* TableData.swift */; };
+		308425372234C47200A6C3DB /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308425362234C47200A6C3DB /* PersistentData.swift */; };
+		3084253A2234D26E00A6C3DB /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308425392234D26E00A6C3DB /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		3084252B2233080F00A6C3DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30842531223439F500A6C3DB /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		3084253322343DB600A6C3DB /* TableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
+		308425362234C47200A6C3DB /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
+		308425392234D26E00A6C3DB /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,9 @@
 			children = (
 				3084252B2233080F00A6C3DB /* Info.plist */,
 				3084251F2233080E00A6C3DB /* AppDelegate.swift */,
+				308425362234C47200A6C3DB /* PersistentData.swift */,
 				3084253322343DB600A6C3DB /* TableData.swift */,
+				308425392234D26E00A6C3DB /* TableViewCell.swift */,
 				30842531223439F500A6C3DB /* TableViewController.swift */,
 				308425262233080F00A6C3DB /* Assets.xcassets */,
 				308425282233080F00A6C3DB /* LaunchScreen.storyboard */,
@@ -138,8 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3084253A2234D26E00A6C3DB /* TableViewCell.swift in Sources */,
 				30842532223439F500A6C3DB /* TableViewController.swift in Sources */,
 				3084253422343DB600A6C3DB /* TableData.swift in Sources */,
+				308425372234C47200A6C3DB /* PersistentData.swift in Sources */,
 				308425202233080E00A6C3DB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

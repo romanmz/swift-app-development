@@ -8,32 +8,36 @@
 
 import Foundation
 
-
-struct Meal {
+struct TableSection: Codable {
 	var name: String
-	var food: [Food]
+	var rows: [TableRow]
 }
-struct Food {
-	let name: String
-	let description: String
+struct TableRow: Codable {
+	var symbol: String
+	var name: String
+	var description: String
 }
-struct TableData {
-	var meals: [Meal] {
-		let breakfast = Meal(name: "Breakfast", food:[
-			Food(name:"Cereal", description:"sweet!"),
-			Food(name:"Fruit", description:"healthy!"),
-			Food(name:"Toast", description:"yummy!"),
+struct TableData: Codable {
+	var sections: [TableSection]
+	
+	// Sample data
+	static var sampleData: TableData {
+		return TableData(sections: [
+			TableSection(name: "Breakfast", rows:[
+				TableRow(symbol: "😀", name:"Cereal", description:"sweet!"),
+				TableRow(symbol: "😕", name:"Fruit", description:"healthy!"),
+				TableRow(symbol: "😍", name:"Toast", description:"yummy!"),
+			]),
+			TableSection(name: "Lunch", rows:[
+				TableRow(symbol: "👮", name:"Steak", description:"protein!"),
+				TableRow(symbol: "🐢", name:"Laksa", description:"warm!"),
+				TableRow(symbol: "🐘", name:"Spagetthi", description:"delicious!"),
+			]),
+			TableSection(name: "Dinner", rows:[
+				TableRow(symbol: "🍝", name:"Sandwich", description:"meh"),
+				TableRow(symbol: "🎲", name:"Chocolate", description:"unhealthy!"),
+				TableRow(symbol: "⛺️", name:"Tacos", description:"yum!"),
+			]),
 		])
-		let lunch = Meal(name: "Lunch", food:[
-			Food(name:"Steak", description:"protein!"),
-			Food(name:"Laksa", description:"warm!"),
-			Food(name:"Spagetthi", description:"delicious!"),
-		])
-		let dinner = Meal(name: "Dinner", food:[
-			Food(name:"Sandwich", description:"meh"),
-			Food(name:"Chocolate", description:"unhealthy!"),
-			Food(name:"Tacos", description:"yum!"),
-		])
-		return [breakfast, lunch, dinner]
 	}
 }

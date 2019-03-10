@@ -27,53 +27,98 @@ class TableViewController: UITableViewController {
 	// etc…
 	
 	
-	// UITableViewCell
-	// ------------------------------
-	// Is included automatically on the table view, you define the settings for individual table cells here
-	// if you defined the table cells to be dynamic, you must set a unique "Identifier" name for them on the Attributes Inspector
-	
-	
-	// Content View (UIView)
-	// ------------------------------
-	// Is included automatically on the table view cell, the actual contents of a cell will be added inside this element
-	// The UITableViewCell has a "style" attribute where you can select from 4 preset layouts for the content
-	// these have the advantage that the content elements will already be available on the cell element as default properties
-	// if you decide to use a fully customized table cell then you'll need to manually set it up, style it, and add the necessary outlets
-	
-	
 	// General settings
 	// ------------------------------
+	var data: TableData! {
+		didSet {
+			TableData.saveToFile(data: data)
+		}
+	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		// Load saved data
+		data = self.loadInitialData()
+		
 		// Preserve selection between presentations
-		self.clearsSelectionOnViewWillAppear = false
+		clearsSelectionOnViewWillAppear = false
+		
 		// Display an "Edit" button in the navigation bar
-		self.navigationItem.rightBarButtonItem = self.editButtonItem
+		navigationItem.rightBarButtonItem = self.editButtonItem
+		
+		// Auto-height for rows
+		tableView.rowHeight = UITableView.automaticDimension
+		tableView.estimatedRowHeight = 54.0
 	}
 	
 	
 	// Populating the table with data
 	// ------------------------------
-	var data = TableData()
 	
 	// Sections
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return data.meals.count
+		return data.sections.count
 	}
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String {
-		return data.meals[section].name
+		return data.sections[section].name
 	}
 	
 	// Rows/cells
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return data.meals[section].food.count
+		return data.sections[section].rows.count
 	}
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "MyTableCell", for: indexPath)
-		let meal = data.meals[indexPath.section]
-		let food = meal.food[indexPath.row]
-		cell.textLabel?.text = food.name
-		cell.detailTextLabel?.text = food.description
+		let cell = tableView.dequeueReusableCell(withIdentifier: "MyTableCell", for: indexPath) as! TableViewCell
+		let cellData = data.sections[indexPath.section].rows[indexPath.row]
+		cell.populate(with: cellData)
 		return cell
+	}
+	
+	
+	// Moving items around
+	// ------------------------------
+	
+	// Enable on individual items
+	override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	// Restrict where items can be moved to, in this example they can't be moved out of their current section
+	override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+		if sourceIndexPath.section != proposedDestinationIndexPath.section {
+			return sourceIndexPath
+		}
+		return proposedDestinationIndexPath
+	}
+	
+	// Move item
+	override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+		let movedRow = data.sections[fromIndexPath.section].rows.remove(at: fromIndexPath.row)
+		data.sections[to.section].rows.insert(movedRow, at: to.row)
+		tableView.reloadData()
+	}
+	
+	
+	// Deleting/inserting items
+	// ------------------------------
+	
+	// Enable on individual items
+	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	// Define what kind of editing users can do on an item: .none, .insert or .delete
+	override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+		return .delete
+	}
+	
+	// Edit item
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			data.sections[indexPath.section].rows.remove(at: indexPath.row)
+			tableView.deleteRows(at: [indexPath], with: .fade)
+		} else if editingStyle == .insert {
+			// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+		}
 	}
 }
