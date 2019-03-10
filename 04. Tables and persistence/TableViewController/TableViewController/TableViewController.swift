@@ -44,7 +44,7 @@ class TableViewController: UITableViewController {
 		clearsSelectionOnViewWillAppear = false
 		
 		// Display an "Edit" button in the navigation bar
-		navigationItem.rightBarButtonItem = self.editButtonItem
+		navigationItem.leftBarButtonItem = self.editButtonItem
 		
 		// Auto-height for rows
 		tableView.rowHeight = UITableView.automaticDimension
@@ -121,4 +121,38 @@ class TableViewController: UITableViewController {
 			// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 		}
 	}
+	
+	
+	// Moving to/from item data editing screen
+	// ------------------------------
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		// newTableRow
+		if segue.identifier == "editTableRow" {
+			guard let selectedCell = tableView.indexPathForSelectedRow,
+				let editScreen = segue.destination as? EditScreenViewController else { return }
+			let selectedRow = data.sections[selectedCell.section].rows[selectedCell.row]
+			editScreen.row = selectedRow
+		}
+	}
+	@IBAction func unwindToTableData(segue: UIStoryboardSegue) {
+		// cancelEditing
+		if segue.identifier == "saveEditing" {
+			guard let editScreen = segue.source as? EditScreenViewController,
+				let row = editScreen.row else { return }
+			if let selectedRow = tableView.indexPathForSelectedRow {
+				// existing item
+				data.sections[selectedRow.section].rows[selectedRow.row] = row
+				tableView.reloadRows(at: [selectedRow], with: .none)
+			} else {
+				// new item
+				let lastSection = data.sections.count - 1
+				let newRow = data.sections[lastSection].rows.count
+				let index = IndexPath(row: newRow, section: lastSection)
+				data.sections[lastSection].rows.append(row)
+				tableView.insertRows(at: [index], with: .automatic)
+			}
+		}
+	}
+	
+	
 }

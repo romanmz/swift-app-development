@@ -15,6 +15,7 @@
 		3084253422343DB600A6C3DB /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3084253322343DB600A6C3DB /* TableData.swift */; };
 		308425372234C47200A6C3DB /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308425362234C47200A6C3DB /* PersistentData.swift */; };
 		3084253A2234D26E00A6C3DB /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308425392234D26E00A6C3DB /* TableViewCell.swift */; };
+		3084253F2235CA5B00A6C3DB /* EditScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3084253E2235CA5B00A6C3DB /* EditScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3084253322343DB600A6C3DB /* TableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
 		308425362234C47200A6C3DB /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		308425392234D26E00A6C3DB /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		3084253E2235CA5B00A6C3DB /* EditScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				3084252B2233080F00A6C3DB /* Info.plist */,
 				3084251F2233080E00A6C3DB /* AppDelegate.swift */,
+				3084253E2235CA5B00A6C3DB /* EditScreenViewController.swift */,
 				308425362234C47200A6C3DB /* PersistentData.swift */,
 				3084253322343DB600A6C3DB /* TableData.swift */,
 				308425392234D26E00A6C3DB /* TableViewCell.swift */,
@@ -146,6 +149,7 @@
 			files = (
 				3084253A2234D26E00A6C3DB /* TableViewCell.swift in Sources */,
 				30842532223439F500A6C3DB /* TableViewController.swift in Sources */,
+				3084253F2235CA5B00A6C3DB /* EditScreenViewController.swift in Sources */,
 				3084253422343DB600A6C3DB /* TableData.swift in Sources */,
 				308425372234C47200A6C3DB /* PersistentData.swift in Sources */,
 				308425202233080E00A6C3DB /* AppDelegate.swift in Sources */,
