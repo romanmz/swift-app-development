@@ -14,13 +14,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 	@IBOutlet weak var imageView: UIImageView!
 	
 	
+	// UIToolbar & UIBarButtonItem
+	// ------------------------------
+	// Allows you to easily create a toolbar with actions available for the user
+	
+	
 	// UIActivityViewController (Sharing popup)
 	// ------------------------------
 	// Info.plist row for requesting permission to save images to the photo library: NSPhotoLibraryAddUsageDescription
-	@IBAction func shareButtonPressed(_ sender: UIButton) {
+	@IBAction func shareButtonPressed(_ sender: Any) {
 		guard let image = imageView.image else { return }
 		let activityController = UIActivityViewController(activityItems: [image, "Photo name"], applicationActivities: nil)
-		activityController.popoverPresentationController?.sourceView = sender
+		if let sender = sender as? UIView {
+			activityController.popoverPresentationController?.sourceView = sender
+		}
 		present(activityController, animated: true, completion: nil)
 	}
 	

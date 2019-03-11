@@ -76,15 +76,28 @@
                                     <constraint firstAttribute="width" secondItem="9DJ-uX-n3D" secondAttribute="height" multiplier="1:1" id="sDv-jZ-UEZ"/>
                                 </constraints>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T1H-k7-Dnd">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="wfU-A6-OMT">
+                                        <connections>
+                                            <action selector="shareButtonPressed:" destination="BYZ-38-t0r" id="Hq7-tS-mZE"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EvX-F2-Mjr" firstAttribute="top" secondItem="9DJ-uX-n3D" secondAttribute="bottom" constant="20" id="2Id-WG-clR"/>
+                            <constraint firstItem="T1H-k7-Dnd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8dL-3b-XvR"/>
                             <constraint firstItem="9DJ-uX-n3D" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Jhw-Vj-JA0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="T1H-k7-Dnd" secondAttribute="bottom" id="Jre-yQ-ivA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EvX-F2-Mjr" secondAttribute="trailing" constant="20" id="V55-pL-uPO"/>
                             <constraint firstItem="EvX-F2-Mjr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="bWb-fD-fSP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9DJ-uX-n3D" secondAttribute="trailing" constant="20" id="hlf-ah-ZK6"/>
                             <constraint firstItem="9DJ-uX-n3D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="jxl-00-01n"/>
+                            <constraint firstItem="T1H-k7-Dnd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="pHu-lW-rjk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
