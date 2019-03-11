@@ -113,5 +113,10 @@ class ViewController: UIViewController {
 	// Supported Interface Orientations: Lets you control which orientations are supported on phones and tables
 	// the UI will rotate to fit a new device orientation only if that orientation is included on this list
 	
+	// Requesting permission to access photo library and camera
+	// NSPhotoLibraryUsageDescription: Request permission to access to the photo library
+	// NSPhotoLibraryAddUsageDescription: Request permission to save images to the photo library
+	// NSCameraUsageDescription: Request permission to use the camera
+	
 	
 }

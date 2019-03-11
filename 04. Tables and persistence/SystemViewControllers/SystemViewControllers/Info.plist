@@ -41,5 +41,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>&quot;Lemme see your photo library&quot;</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>&quot;Lemme save photos to your library&quot;</string>
+	<key>NSCameraUsageDescription</key>
+	<string>&quot;Let us see your ugly face&quot;</string>
 </dict>
 </plist>
