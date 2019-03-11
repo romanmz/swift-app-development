@@ -1,6 +1,11 @@
 import UIKit
 
-// The properties of this struct all conform to the 'Codable' protocol, so the struct itself can also be declared as conforming without having to implement any properties or methods
+
+// Codable Protocol
+// ------------------------------
+
+// The properties of this struct all conform to the 'Codable' protocol,
+// so the struct itself can also be declared as conforming without having to implement any properties or methods
 struct Note: Codable {
 	let title: String
 	let text: String
@@ -11,10 +16,18 @@ let note2 = Note(title: "Note Two", text: "This is another sample note.", timest
 let note3 = Note(title: "Note Three", text: "This is yet another sample note.", timestamp: Date())
 let notes = [note1, note2, note3]
 
+
+// FileManager class
+// ------------------------------
+
 // Use the 'FileManager' class to get the paths to the writable folder for the app
 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let archiveURL = documentsDirectory.appendingPathComponent("notes_test").appendingPathExtension("plist")
 print(archiveURL)
+
+
+// Encoder/Decoder: Property Lists (.plist files)
+// ------------------------------
 
 // Use the 'PropertyListEncoder' class to encode an instance in a way that can be saved to disk
 let propertyListEncoder = PropertyListEncoder()
