@@ -41,7 +41,7 @@ class ListViewController: UITableViewController {
 			editView.item = item
 			editView.navigationItem.title = "Editing item “\(item.title)”"
 		} else {
-			editView.item = ListItem(title: "", date: Date(), priority: .low)
+			editView.item = ListItem()
 			editView.navigationItem.title = "New item"
 		}
 	}

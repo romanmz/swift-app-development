@@ -28,6 +28,9 @@ class ItemEditViewController: UITableViewController {
 	@IBOutlet weak var datePickerField: UIDatePicker!
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var priorityLabel: UILabel!
+	@IBOutlet weak var stepperLabel: UILabel!
+	@IBOutlet weak var stepperField: UIStepper!
+	@IBOutlet weak var switchField: UISwitch!
 	@IBOutlet weak var saveButton: UIBarButtonItem!
 	
 	
@@ -42,10 +45,13 @@ class ItemEditViewController: UITableViewController {
 		datePickerField.date = item.date
 		dateLabel.text = item.readableDate
 		priorityLabel.text = item.priority.description
+		stepperLabel.text = "\(item.amount)"
+		stepperField.value = Double(item.amount)
+		switchField.isOn = item.toggle
 		toggleSaveButton()
 	}
 	func toggleSaveButton() {
-		saveButton.isEnabled = !item.title.isEmpty
+		saveButton.isEnabled = !item.title.isEmpty && item.amount > 0
 	}
 	
 	
@@ -97,6 +103,20 @@ class ItemEditViewController: UITableViewController {
 			let selectView = segue.source as? OptionSelectViewController,
 			let selectedPriority = selectView.selectedOption as? ListItemPriority else { return }
 		item.priority = selectedPriority
+	}
+	
+	
+	// Stepper field
+	// ------------------------------
+	@IBAction func stepperFieldChanged(_ sender: UIStepper) {
+		item.amount = Int(sender.value)
+	}
+	
+	
+	// Switch field
+	// ------------------------------
+	@IBAction func switchFieldChanged(_ sender: UISwitch) {
+		item.toggle = sender.isOn
 	}
 	
 	

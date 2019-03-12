@@ -9,9 +9,12 @@
 import Foundation
 
 struct ListItem {
-	var title: String
-	var date: Date
-	var priority: ListItemPriority
+	var title: String = ""
+	var date: Date = Date()
+	var priority: ListItemPriority = .low
+	var amount: Int = 1
+	var toggle: Bool = false
+	
 	var readableDate: String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateStyle = .medium
