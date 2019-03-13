@@ -45,4 +45,12 @@ class ViewController: UIViewController {
 			})
 		}
 	}
+	
+	
+	// Forcing layout updates
+	// ------------------------------
+	// Use the view.layoutIfNeeded() method to force the view to update its layout immediately
+	// sometimes this is necessary inside animations to make the transitions smoother
+	
+	
 }
