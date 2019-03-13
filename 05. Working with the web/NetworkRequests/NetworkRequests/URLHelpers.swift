@@ -1,17 +1,20 @@
 //
 //  URLHelpers.swift
-//  SpacePhoto
+//  NetworkRequests
 //
-//  Created by Roman Martinez on 28/9/17.
-//  Copyright © 2017 Roman Martinez. All rights reserved.
+//  Created by Román Martínez on 3/13/19.
+//  Copyright © 2019 Román Martínez. All rights reserved.
 //
 
 import Foundation
 
+
+// Helper methods for handling URLs
+// ------------------------------
 extension URL {
 	func withQueries(_ queries: [String:String]) -> URL? {
 		var components = URLComponents(url: self, resolvingAgainstBaseURL: true)
-		components?.queryItems = queries.flatMap { URLQueryItem(name: $0.0, value: $0.1) }
+		components?.queryItems = queries.compactMap { URLQueryItem(name: $0.0, value: $0.1) }
 		return components?.url
 	}
 	func withHTTPS() -> URL? {

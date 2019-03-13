@@ -44,3 +44,8 @@ if
 		print(note)
 	}
 }
+
+
+// Encoder/Decoder: JSON
+// ------------------------------
+// Use the JSONEncoder and JSONDecoder classes to handle .json files
