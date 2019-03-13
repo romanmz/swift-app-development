@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemEditViewController: UITableViewController {
+class ItemEditViewController: UITableViewController, UITextViewDelegate {
 	
 	
 	// Data
@@ -31,6 +31,7 @@ class ItemEditViewController: UITableViewController {
 	@IBOutlet weak var stepperLabel: UILabel!
 	@IBOutlet weak var stepperField: UIStepper!
 	@IBOutlet weak var switchField: UISwitch!
+	@IBOutlet weak var notesField: UITextView!
 	@IBOutlet weak var saveButton: UIBarButtonItem!
 	
 	
@@ -39,6 +40,7 @@ class ItemEditViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		updateUI()
+		setupTextView()
 	}
 	func updateUI() {
 		nameTextField.text = item.title
@@ -48,10 +50,27 @@ class ItemEditViewController: UITableViewController {
 		stepperLabel.text = "\(item.amount)"
 		stepperField.value = Double(item.amount)
 		switchField.isOn = item.toggle
+		notesField.text = item.notes
 		toggleSaveButton()
 	}
 	func toggleSaveButton() {
 		saveButton.isEnabled = !item.title.isEmpty && item.amount > 0
+	}
+	
+	
+	// Handle segues
+	// ------------------------------
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		switch segue.identifier {
+			case "showPriorityOptions": populatePriorityOptions(on: segue.destination)
+			default: break
+		}
+	}
+	@IBAction func unwindToItemEdit(segue: UIStoryboardSegue) {
+		switch segue.identifier {
+			case "selectedPriority": receivePriorityOption(from: segue.source)
+			default: break
+		}
 	}
 	
 	
@@ -79,7 +98,7 @@ class ItemEditViewController: UITableViewController {
 		if indexPath.section == 0 && indexPath.row == 2 {
 			return isEditingDate ? datePickerField.intrinsicContentSize.height : 0.0
 		}
-		return 44.0
+		return super.tableView(tableView, heightForRowAt: indexPath)
 	}
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
@@ -91,16 +110,14 @@ class ItemEditViewController: UITableViewController {
 	
 	// Options selector
 	// ------------------------------
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard segue.identifier == "showPriorityOptions",
-			let selectView = segue.destination as? OptionSelectViewController else { return }
+	func populatePriorityOptions(on view: UIViewController) {
+		guard let selectView = view as? OptionSelectViewController else { return }
 		selectView.options = ListItemPriority.all
 		selectView.selectedOption = item.priority
 		selectView.navigationItem.title = "Item Priority"
 	}
-	@IBAction func unwindToItemEdit(segue: UIStoryboardSegue) {
-		guard segue.identifier == "selectedPriority",
-			let selectView = segue.source as? OptionSelectViewController,
+	func receivePriorityOption(from view: UIViewController) {
+		guard let selectView = view as? OptionSelectViewController,
 			let selectedPriority = selectView.selectedOption as? ListItemPriority else { return }
 		item.priority = selectedPriority
 	}
@@ -117,6 +134,19 @@ class ItemEditViewController: UITableViewController {
 	// ------------------------------
 	@IBAction func switchFieldChanged(_ sender: UISwitch) {
 		item.toggle = sender.isOn
+	}
+	
+	
+	// Text field
+	// ------------------------------
+	// For multi-line text boxes you can use the UITextView element
+	// however since it doesn't inherit from UIControl you'll need to handle it a bit differently
+	// to detect changes on the text you need to attach a delegate object conforming to the UITextViewDelegate protocol
+	func setupTextView() {
+		notesField.delegate = self
+	}
+	func textViewDidChange(_ textView: UITextView) {
+		item.notes = textView.text
 	}
 	
 	

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewController: UITableViewController {
+class ListViewController: UITableViewController, ListItemCellDelegate {
 	
 	
 	// Populate table content
@@ -27,8 +27,20 @@ class ListViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ListItem", for: indexPath) as! ListItemCell
 		let item = items[indexPath.row]
+		cell.delegate = self
 		cell.update(with: item)
 		return cell
+	}
+	
+	
+	// Catch events from within cells
+	// ------------------------------
+	func toggleDidChange(toggle: UIButton, cell: ListItemCell) {
+		guard let index = tableView.indexPath(for: cell) else { return }
+		var item = items[index.row]
+		item.toggle = !item.toggle
+		items.remove(at: index.row)
+		items.insert(item, at: index.row)
 	}
 	
 	

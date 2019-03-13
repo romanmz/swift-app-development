@@ -14,6 +14,7 @@ struct ListItem {
 	var priority: ListItemPriority = .low
 	var amount: Int = 1
 	var toggle: Bool = false
+	var notes: String = ""
 	
 	var readableDate: String {
 		let dateFormatter = DateFormatter()

@@ -66,7 +66,6 @@
 				30FAA7F72237586A004C5C7C /* Info.plist */,
 				30FAA7EB22375869004C5C7C /* AppDelegate.swift */,
 				30FAA80022375BA8004C5C7C /* ListItem.swift */,
-				30FAA80222375E46004C5C7C /* ListItemCell.swift */,
 				30FAA7F22237586A004C5C7C /* Assets.xcassets */,
 				30FAA7F42237586A004C5C7C /* LaunchScreen.storyboard */,
 				30FAA7EF22375869004C5C7C /* Main.storyboard */,
@@ -78,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				30FAA7FE22375A9A004C5C7C /* ListViewController.swift */,
+				30FAA80222375E46004C5C7C /* ListItemCell.swift */,
 				30FAA80422376340004C5C7C /* ItemEditViewController.swift */,
 				30FAA80622376715004C5C7C /* OptionSelectViewController.swift */,
 			);
