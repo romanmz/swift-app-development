@@ -22,27 +22,56 @@ class FeedController {
 	// Properties
 	// ------------------------------
 	static let decoder = JSONDecoder()
+	static var pendingRequests = 0
 	
 	
-	// Get feed item
+	// Generic network requests
 	// ------------------------------
-	static func fetchFeedItem(completion: @escaping (FeedItem?) -> Void ) {
-		
-		// Build URL
-		let baseUrl = URL(string: "https://api.nasa.gov/planetary/apod")!
-		let query = ["api_key":"DEMO_KEY", "date":"2000-10-10"]
-		let url = baseUrl.withQueries(query)!
-		
-		// Prepare request
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		let task = URLSession.shared.dataTask(with: url) {
-			
-			// Callback
-			(data, response, error) in
+	static func beginRequest() {
+		self.pendingRequests += 1
+		DispatchQueue.main.async {
+			UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		}
+	}
+	static func finishedRequest() {
+		self.pendingRequests -= 1
+		if self.pendingRequests <= 0 {
 			DispatchQueue.main.async {
 				UIApplication.shared.isNetworkActivityIndicatorVisible = false
 			}
-			guard error == nil,
+		}
+	}
+	static func fetchData(query: [String:String], completion: @escaping (Data?) -> Void) {
+		
+		// Build URL
+		let baseUrl = URL(string: "https://api.nasa.gov/planetary/apod")!
+		let query = ["api_key":"DEMO_KEY"].merging(query) { (current, _) in current }
+		let url = baseUrl.withQueries(query)!
+		
+		// Prepare callback
+		let resultHandler = {
+			(data: Data?, response: URLResponse?, error: Error?) -> Void in
+			self.finishedRequest()
+			if error == nil, let data = data {
+				completion(data)
+				return
+			}
+			completion(nil)
+		}
+		
+		// Begin request
+		self.beginRequest()
+		let task = URLSession.shared.dataTask(with: url, completionHandler: resultHandler)
+		task.resume()
+	}
+	
+	
+	// Get feed item (Using the Codable protocol)
+	// ------------------------------
+	static func fetchFeedItem(completion: @escaping (FeedItem?) -> Void ) {
+		self.fetchData(query: [:]) {
+			(data) in
+			guard
 				let data = data,
 				let feedItem = try? self.decoder.decode(FeedItem.self, from: data) else {
 					completion(nil)
@@ -50,22 +79,37 @@ class FeedController {
 			}
 			completion(feedItem)
 		}
-		
-		// Send request
-		task.resume()
+	}
+	
+	
+	// Get feed items (Manuall converting a json Dict)
+	// ------------------------------
+	static func fetchFeedItems(completion: @escaping ([FeedItem]?) -> Void ) {
+		self.fetchData(query: ["start_date":"2019-01-01", "end_date":"2019-01-05"]) {
+			(data) in
+			guard
+				let data = data,
+				let rawJSON = try? JSONSerialization.jsonObject(with: data),
+				let json = rawJSON as? [[String: Any]] else {
+					completion(nil)
+					return
+			}
+			let feedItems = json.compactMap { FeedItem(json: $0) }
+			completion(feedItems)
+		}
 	}
 	
 	
 	// Get photo
 	// ------------------------------
 	static func fetchPhoto(from url: URL, completion: @escaping (UIImage?) -> Void) {
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		let task = URLSession.shared.dataTask(with: url) {
-			(data, response, error) in
-			DispatchQueue.main.async {
-				UIApplication.shared.isNetworkActivityIndicatorVisible = false
-			}
-			guard error == nil,
+		
+		// Prepare callback
+		let resultHandler = {
+			(data: Data?, response: URLResponse?, error: Error?) -> Void in
+			self.finishedRequest()
+			guard
+				error == nil,
 				let data = data,
 				let image = UIImage(data: data) else {
 					completion(nil)
@@ -73,6 +117,10 @@ class FeedController {
 			}
 			completion(image)
 		}
+		
+		// Begin request
+		self.beginRequest()
+		let task = URLSession.shared.dataTask(with: url, completionHandler: resultHandler)
 		task.resume()
 	}
 }

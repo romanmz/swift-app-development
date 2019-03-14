@@ -15,15 +15,14 @@ import Foundation
 // but you can also define your own custom type and convert the json item into this type
 // the custom type needs to conform to the "Codable" protocol
 
-// When defining the CodingKeys you can load attributes and change their names to something else
-// in this example, there's an "explanation" property on the feed item, but we're importing it as "description"
-
 struct FeedItem: Codable {
 	var title: String
 	var description: String
 	var url: URL
 	var copyright: String?
 	
+	// When defining the CodingKeys you can load attributes and change their names to something else
+	// in this example, there's an "explanation" property on the feed item, but we're importing it as "description"
 	enum CodingKeys: String, CodingKey {
 		case title, description = "explanation", url, copyright
 	}
@@ -34,4 +33,18 @@ struct FeedItem: Codable {
 		self.url = try valueContainer.decode(URL.self, forKey: CodingKeys.url)
 		self.copyright = try? valueContainer.decode(String.self, forKey: CodingKeys.copyright)
 	}
+	
+	// You can also make the conversion manually by having a failable initializer that accepts a json object as a simple dictionary
+	init?(json: [String: Any]) {
+		guard
+			let title = json["title"] as? String,
+			let description = json["explanation"] as? String,
+			let urlString = json["url"] as? String,
+			let url = URL(string: urlString) else { return nil }
+		self.title = title
+		self.description = description
+		self.url = url
+		self.copyright = json["copyright"] as? String
+	}
+	
 }

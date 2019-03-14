@@ -41,11 +41,31 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="k2b-Ec-ls0">
+                                <rect key="frame" x="20" y="266.5" width="335" height="46.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other items:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGO-sx-KQh">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iM-Bb-PgT">
+                                        <rect key="frame" x="0.0" y="30.5" width="335" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k2b-Ec-ls0" secondAttribute="trailing" constant="20" id="77e-db-zkG"/>
+                            <constraint firstItem="k2b-Ec-ls0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="b2S-Hd-AnT"/>
                             <constraint firstItem="ah7-7n-Rlu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fBo-9z-Hej"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ah7-7n-Rlu" secondAttribute="trailing" constant="20" id="ioz-S9-pEx"/>
+                            <constraint firstItem="k2b-Ec-ls0" firstAttribute="top" secondItem="ah7-7n-Rlu" secondAttribute="bottom" constant="20" id="kEZ-4x-uHj"/>
                             <constraint firstItem="ah7-7n-Rlu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="kGS-E8-Rz4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -54,6 +74,7 @@
                         <outlet property="itemCopyright" destination="fRJ-Jb-VIt" id="dzT-Bo-q01"/>
                         <outlet property="itemDescription" destination="PfB-5K-MZF" id="DVU-P7-eYh"/>
                         <outlet property="itemImage" destination="c0g-om-iwg" id="zC5-Ei-hLP"/>
+                        <outlet property="otherItemsLabel" destination="1iM-Bb-PgT" id="JbF-jH-Ao2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
