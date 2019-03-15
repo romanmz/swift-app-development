@@ -17,6 +17,7 @@
 		30431AC9223B8BD700B870CD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30431AC8223B8BD700B870CD /* CategoryViewController.swift */; };
 		307725F1223C138700757CBB /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F0223C138700757CBB /* MenuItemCell.swift */; };
 		307725F3223C27F300757CBB /* MenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F2223C27F300757CBB /* MenuItemViewController.swift */; };
+		307725F5223C393E00757CBB /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F4223C393E00757CBB /* OrderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		30431AC8223B8BD700B870CD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		307725F0223C138700757CBB /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
 		307725F2223C27F300757CBB /* MenuItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemViewController.swift; sourceTree = "<group>"; };
+		307725F4223C393E00757CBB /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				30431ABF223B246300B870CD /* CategoriesViewController.swift */,
 				30431AC8223B8BD700B870CD /* CategoryViewController.swift */,
 				307725F2223C27F300757CBB /* MenuItemViewController.swift */,
+				307725F4223C393E00757CBB /* OrderViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				307725F3223C27F300757CBB /* MenuItemViewController.swift in Sources */,
 				30431AC0223B246300B870CD /* CategoriesViewController.swift in Sources */,
 				30431AC7223B27C900B870CD /* Menu.swift in Sources */,
+				307725F5223C393E00757CBB /* OrderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
