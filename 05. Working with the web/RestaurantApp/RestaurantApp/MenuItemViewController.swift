@@ -20,21 +20,29 @@ class MenuItemViewController: UIViewController {
 	@IBOutlet weak var priceLabel: UILabel!
 	@IBOutlet weak var categoryLabel: UILabel!
 	@IBOutlet weak var descriptionLabel: UILabel!
+	@IBOutlet weak var addToOrderButton: UIButton!
 	
 	
 	// Initialize
 	// ------------------------------
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationItem.title = menuItem.name
 		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: MenuData.menuUpdatedNotification, object: nil)
 		updateUI()
 	}
 	@objc func updateUI() {
+		
+		// View
+		navigationItem.title = menuItem.name
+		addToOrderButton.layer.cornerRadius = 5.0
+		
+		// Item details
 		nameLabel.text = menuItem.name
 		priceLabel.text = menuItem.formattedPrice
 		categoryLabel.text = menuItem.category.capitalized
 		descriptionLabel.text = menuItem.description
+		
+		// Photo
 		mainImage.image = placeholderImage
 		MenuData.fetchImage(url: menuItem.imageURL) {
 			image in
@@ -43,6 +51,17 @@ class MenuItemViewController: UIViewController {
 				self.mainImage.image = image
 			}
 		}
+	}
+	
+	
+	// User actions
+	// ------------------------------
+	@IBAction func addToOrderButtonTapped(_ sender: UIButton) {
+		UIView.animate(withDuration: 0.3) {
+			self.addToOrderButton.transform = CGAffineTransform(scaleX: 3.0, y: 3.0)
+			self.addToOrderButton.transform = CGAffineTransform.identity
+		}
+		MenuData.order.menuItems.append(menuItem)
 	}
 	
 	

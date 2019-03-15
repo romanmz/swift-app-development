@@ -15,6 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// Properties
 	// ------------------------------
 	var window: UIWindow?
+	var tabBar: UITabBarController {
+		return self.window!.rootViewController! as! UITabBarController
+	}
+	var tabViews: [UIViewController] {
+		return tabBar.viewControllers!
+	}
 	
 	
 	// Lifecycle hooks
@@ -24,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		return true
 	}
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+		setupOrderBadge()
 		return true
 	}
 	
@@ -49,7 +56,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
-
-
+	
+	
+	// Manage "Your Order" badge
+	// ------------------------------
+	var orderTabBarItem: UITabBarItem {
+		return tabViews[1].tabBarItem
+	}
+	func setupOrderBadge() {
+		NotificationCenter.default.addObserver(self, selector: #selector(updateOrderBadge), name: MenuData.orderUpdatedNotification, object: nil)
+		updateOrderBadge()
+	}
+	@objc func updateOrderBadge() {
+		let count = MenuData.order.menuItems.count
+		orderTabBarItem.badgeValue = count == 0 ? nil : "\(count)"
+	}
+	
+	
 }
-
