@@ -53,4 +53,14 @@ class CategoryViewController: UITableViewController {
 	}
 	
 	
+	// Segues
+	// ------------------------------
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard segue.identifier == "ShowMenuItemSegue",
+			let menuItemView = segue.destination as? MenuItemViewController,
+			let selectedIndex = tableView.indexPathForSelectedRow else { return }
+		menuItemView.menuItem = menuItems[selectedIndex.row]
+	}
+	
+	
 }

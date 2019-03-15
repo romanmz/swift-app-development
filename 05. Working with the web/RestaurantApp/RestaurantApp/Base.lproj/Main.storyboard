@@ -232,7 +232,7 @@
         <!--Menu Item-->
         <scene sceneID="vfK-Nn-rvf">
             <objects>
-                <viewController id="kLU-3H-HIg" userLabel="Menu Item" sceneMemberID="viewController">
+                <viewController id="kLU-3H-HIg" userLabel="Menu Item" customClass="MenuItemViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nuh-jj-du8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -306,6 +306,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="P2U-zp-jXc"/>
                     </view>
+                    <connections>
+                        <outlet property="categoryLabel" destination="z03-Jo-fOd" id="Ujk-Up-H2N"/>
+                        <outlet property="descriptionLabel" destination="XBs-wb-bUc" id="ZQD-ve-ANa"/>
+                        <outlet property="mainImage" destination="BEU-FA-a9n" id="XaE-2s-DMo"/>
+                        <outlet property="nameLabel" destination="sVg-XN-avh" id="O5b-We-u7t"/>
+                        <outlet property="priceLabel" destination="edu-db-otZ" id="BrI-g7-qKh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hYG-Cu-0s0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
