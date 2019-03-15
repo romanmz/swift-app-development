@@ -79,24 +79,27 @@ class MenuData {
 	
 	// Fetch entire menu
 	// ------------------------------
-	static func fetchMenuItems() {
+	static func fetchMenuItems(completion: @escaping ([MenuItem]?) -> Void) {
 		
 		// Prepare URL
 		let baseMenuURL = baseURL.appendingPathComponent("menu")
 		let components = URLComponents(url: baseMenuURL, resolvingAgainstBaseURL: true)!
 		let menuURL = components.url!
 		
-		// Prepare callback
-		let callback = { (data: Data?, _: URLResponse?, _: Error?) -> Void in
-			if let data = data, let menuItems = try? self.decoder.decode(MenuItems.self, from: data) {
-				self.menuItems = menuItems.items
-			}
-			self.networkRequestFinished()
-		}
-		
 		// Submit request
 		networkRequestStarted()
-		let task = URLSession.shared.dataTask(with: menuURL, completionHandler: callback)
+		let task = URLSession.shared.dataTask(with: menuURL) {
+			(data, _, _) in
+			
+			// Callback
+			self.networkRequestFinished()
+			guard let data = data,
+				let menuItems = try? self.decoder.decode(MenuItems.self, from: data) else {
+				completion(nil)
+				return
+			}
+			completion(menuItems.items)
+		}
 		task.resume()
 	}
 	
@@ -108,11 +111,12 @@ class MenuData {
 		let task = URLSession.shared.dataTask(with: url) {
 			(data, _, _) in
 			self.networkRequestFinished()
-			if let data = data, let image = UIImage(data: data) {
-				completion(image)
+			guard let data = data,
+				let image = UIImage(data: data) else {
+				completion(nil)
 				return
 			}
-			completion(nil)
+			completion(image)
 		}
 		task.resume()
 	}
@@ -138,12 +142,15 @@ class MenuData {
 		networkRequestStarted()
 		let task = URLSession.shared.dataTask(with: request) {
 			(data, response, error) in
+			
+			// Callback
 			self.networkRequestFinished()
-			if let data = data, let time = try? self.decoder.decode(PreparationTime.self, from: data) {
-				completion(time.prepTime)
+			guard let data = data,
+				let time = try? self.decoder.decode(PreparationTime.self, from: data) else {
+				completion(nil)
 				return
 			}
-			completion(nil)
+			completion(time.prepTime)
 		}
 		task.resume()
 	}

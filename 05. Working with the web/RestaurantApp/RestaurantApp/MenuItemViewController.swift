@@ -46,8 +46,11 @@ class MenuItemViewController: UIViewController {
 		mainImage.image = placeholderImage
 		MenuData.fetchImage(url: menuItem.imageURL) {
 			image in
-			guard let image = image else { return }
 			DispatchQueue.main.async {
+				guard let image = image else {
+					self.errorAlert(title: "Network error", message: "There was an error while trying to load the image from \(self.menuItem.imageURL)")
+					return
+				}
 				self.mainImage.image = image
 			}
 		}

@@ -26,7 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// Lifecycle hooks
 	// ------------------------------
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-		MenuData.fetchMenuItems()
+		MenuData.fetchMenuItems { items in
+			if let items = items {
+				MenuData.menuItems = items
+			} else {
+				DispatchQueue.main.async {
+					self.tabBar.selectedViewController?.errorAlert(title: "Network error", message: "There was an error while trying to load the menu items from the server")
+				}
+			}
+		}
 		return true
 	}
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

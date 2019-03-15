@@ -24,7 +24,7 @@ struct Order: Codable {
 	}
 	
 	// Submitting an order
-	func getSubmitAlert(callback: @escaping (_:Int?)->Void) -> UIAlertController {
+	func getSubmitAlert(callback: @escaping (Int?)->Void) -> UIAlertController {
 		let alert = UIAlertController(title: "Confirm Order", message: "You are about to submit your order with a total of \(formattedTotalCost)", preferredStyle: .alert)
 		let submitAction = UIAlertAction(title: "Submit", style: .default) { alertAction in self.requestTimeEstimate(callback: callback) }
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -32,8 +32,8 @@ struct Order: Codable {
 		alert.addAction(cancelAction)
 		return alert
 	}
-	func requestTimeEstimate(callback: @escaping (_:Int?)->Void) {
-		MenuData.submitOrder(order: MenuData.order) { prepTime in callback(prepTime) }
+	func requestTimeEstimate(callback: @escaping (Int?)->Void) {
+		MenuData.submitOrder(order: MenuData.order, completion: callback)
 	}
 }
 

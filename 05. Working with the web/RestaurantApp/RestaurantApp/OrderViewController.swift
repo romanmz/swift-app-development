@@ -69,8 +69,11 @@ class OrderViewController: UITableViewController {
 		present(submitAlert, animated: true, completion: nil)
 	}
 	func receivedTimeEstimate(_ prepTime: Int?) {
-		guard let prepTime = prepTime else { return }
 		DispatchQueue.main.async {
+			guard let prepTime = prepTime else {
+				self.errorAlert(title: "Network error", message: "There was an error while trying to get the time estimate for your order")
+				return
+			}
 			self.performSegue(withIdentifier: "SubmitOrderSegue", sender: prepTime)
 		}
 	}

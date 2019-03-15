@@ -31,8 +31,12 @@ class MenuItemCell: UITableViewCell {
 		// Load image
 		MenuData.fetchImage(url: menuItem.imageURL) {
 			image in
-			guard let image = image else { return }
 			DispatchQueue.main.async {
+				// Error
+				guard let image = image else {
+					view.errorAlert(title: "Network error", message: "There was an error while trying to load the image from \(menuItem.imageURL)")
+					return
+				}
 				// Since this is an asynchronous call, we need to ensure we're still modifying the correct cell
 				guard view.tableView.indexPath(for: self) == indexPath else { return }
 				self.thumbnailImage.image = image
