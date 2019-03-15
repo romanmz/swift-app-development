@@ -49,3 +49,18 @@ if
 // Encoder/Decoder: JSON
 // ------------------------------
 // Use the JSONEncoder and JSONDecoder classes to handle .json files
+
+
+// Network requests & State preservation
+// ------------------------------
+
+// By default an application will always load its initial view controller on launch,
+// so it's safe to run any initializer code on that view
+
+// However you can implement state preservation so that users won't lose their place on the application even if they closed it
+// but this could cause issues if the preserved view depends on dynamic data that was meant to be loaded from the initial view
+// in this case you can use the AppDelegate class to hook the necessary network calls on the app lifecycle events to ensure they will run
+// regardless of which view is presented at launch
+
+// If you're also implementing data persistence then you can load the stored data immediately on launch so users won't have to wait to use the app
+// but at the same time request the updated data from the remote server so users can see the most up to date information as soon as possible

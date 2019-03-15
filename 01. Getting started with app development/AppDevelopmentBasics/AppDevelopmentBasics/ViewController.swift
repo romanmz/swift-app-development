@@ -118,5 +118,9 @@ class ViewController: UIViewController {
 	// NSPhotoLibraryAddUsageDescription: Request permission to save images to the photo library
 	// NSCameraUsageDescription: Request permission to use the camera
 	
+	// Secure network activity
+	// NSAppTransportSecurity: Lists all security settings
+	//     NSAllowsArbitraryLoads: Defines whether or not unsafe (not https) requests are allowed
+	
 	
 }
