@@ -118,4 +118,35 @@ class MenuData {
 	}
 	
 	
+	// Submit orders
+	// ------------------------------
+	static func submitOrder(order: Order, completion: @escaping (Int?)->Void) {
+		
+		// Prepare request
+		let url = baseURL.appendingPathComponent("order")
+		var request = URLRequest(url: url)
+		request.httpMethod = "POST"
+		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+		
+		// Prepare data to be sent
+		let menuIds = order.menuItems.map { $0.id }
+		let data: [String: [Int]] = ["menuIds": menuIds]
+		let jsonData = try? self.encoder.encode(data)
+		request.httpBody = jsonData
+		
+		// Fetch data
+		networkRequestStarted()
+		let task = URLSession.shared.dataTask(with: request) {
+			(data, response, error) in
+			self.networkRequestFinished()
+			if let data = data, let time = try? self.decoder.decode(PreparationTime.self, from: data) {
+				completion(time.prepTime)
+				return
+			}
+			completion(nil)
+		}
+		task.resume()
+	}
+	
+	
 }

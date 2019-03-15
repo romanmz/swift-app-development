@@ -18,6 +18,7 @@
 		307725F1223C138700757CBB /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F0223C138700757CBB /* MenuItemCell.swift */; };
 		307725F3223C27F300757CBB /* MenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F2223C27F300757CBB /* MenuItemViewController.swift */; };
 		307725F5223C393E00757CBB /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F4223C393E00757CBB /* OrderViewController.swift */; };
+		307725F7223C584200757CBB /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F6223C584200757CBB /* ConfirmationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		307725F0223C138700757CBB /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
 		307725F2223C27F300757CBB /* MenuItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemViewController.swift; sourceTree = "<group>"; };
 		307725F4223C393E00757CBB /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		307725F6223C584200757CBB /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				30431AC3223B256700B870CD /* Models */,
+				307725F8223C585900757CBB /* Templates */,
 				30431ABE223B244500B870CD /* Controllers */,
 				30431AB7223B1B4300B870CD /* Info.plist */,
 				30431AAB223B1B4300B870CD /* AppDelegate.swift */,
@@ -80,12 +83,11 @@
 		30431ABE223B244500B870CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				30431AC4223B258600B870CD /* MenuData.swift */,
-				307725F0223C138700757CBB /* MenuItemCell.swift */,
 				30431ABF223B246300B870CD /* CategoriesViewController.swift */,
 				30431AC8223B8BD700B870CD /* CategoryViewController.swift */,
 				307725F2223C27F300757CBB /* MenuItemViewController.swift */,
 				307725F4223C393E00757CBB /* OrderViewController.swift */,
+				307725F6223C584200757CBB /* ConfirmationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -94,8 +96,17 @@
 			isa = PBXGroup;
 			children = (
 				30431AC6223B27C900B870CD /* Menu.swift */,
+				30431AC4223B258600B870CD /* MenuData.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		307725F8223C585900757CBB /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				307725F0223C138700757CBB /* MenuItemCell.swift */,
+			);
+			name = Templates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 				30431AC9223B8BD700B870CD /* CategoryViewController.swift in Sources */,
 				30431AC5223B258600B870CD /* MenuData.swift in Sources */,
 				30431AAC223B1B4300B870CD /* AppDelegate.swift in Sources */,
+				307725F7223C584200757CBB /* ConfirmationViewController.swift in Sources */,
 				307725F1223C138700757CBB /* MenuItemCell.swift in Sources */,
 				307725F3223C27F300757CBB /* MenuItemViewController.swift in Sources */,
 				30431AC0223B246300B870CD /* CategoriesViewController.swift in Sources */,

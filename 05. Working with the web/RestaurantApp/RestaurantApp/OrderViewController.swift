@@ -11,13 +11,9 @@ import UIKit
 class OrderViewController: UITableViewController {
 	
 	
-	// Properties
+	// Interface Builder outlets
 	// ------------------------------
-	var order: Order! {
-		didSet {
-			tableView.reloadData()
-		}
-	}
+	@IBOutlet weak var submitButton: UIBarButtonItem!
 	
 	
 	// Initialize
@@ -25,11 +21,13 @@ class OrderViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.leftBarButtonItem = editButtonItem
-		NotificationCenter.default.addObserver(self, selector: #selector(updateOrder), name: MenuData.orderUpdatedNotification, object: nil)
-		updateOrder()
+		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: MenuData.orderUpdatedNotification, object: nil)
+		updateUI()
 	}
-	@objc func updateOrder() {
-		order = MenuData.order
+	@objc func updateUI() {
+		submitButton.isEnabled = MenuData.order.menuItems.count > 0
+		editButtonItem.isEnabled = MenuData.order.menuItems.count > 0
+		tableView.reloadData()
 	}
 	
 	
@@ -39,11 +37,11 @@ class OrderViewController: UITableViewController {
 		return 1
 	}
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return order.menuItems.count
+		return MenuData.order.menuItems.count
 	}
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "OrderItemCell", for: indexPath) as! MenuItemCell
-		let menuItem = order.menuItems[indexPath.row]
+		let menuItem = MenuData.order.menuItems[indexPath.row]
 		cell.update(with: menuItem, at: indexPath, in: self)
 		return cell
 	}
@@ -61,6 +59,29 @@ class OrderViewController: UITableViewController {
 		if editingStyle == .delete {
 			MenuData.order.menuItems.remove(at: indexPath.row)
 		}
+	}
+	
+	
+	// Submit orders
+	// ------------------------------
+	@IBAction func submitButtonTapped(_ sender: UIBarButtonItem) {
+		MenuData.submitOrder(order: MenuData.order) {
+			prepTime in
+			self.performSegue(withIdentifier: "SubmitOrderSegue", sender: prepTime)
+		}
+	}
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard segue.identifier == "SubmitOrderSegue",
+			let confirmationView = segue.destination as? ConfirmationViewController,
+			let prepTime = sender as? Int else { return }
+		confirmationView.prepTime = prepTime
+	}
+	
+	
+	// Come back
+	// ------------------------------
+	@IBAction func unwindToOrderView(segue: UIStoryboardSegue) {
+		MenuData.order.menuItems = []
 	}
 	
 	
