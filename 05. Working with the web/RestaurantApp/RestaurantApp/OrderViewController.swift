@@ -65,8 +65,12 @@ class OrderViewController: UITableViewController {
 	// Submit orders
 	// ------------------------------
 	@IBAction func submitButtonTapped(_ sender: UIBarButtonItem) {
-		MenuData.submitOrder(order: MenuData.order) {
-			prepTime in
+		let submitAlert = MenuData.order.getSubmitAlert(callback: receivedTimeEstimate)
+		present(submitAlert, animated: true, completion: nil)
+	}
+	func receivedTimeEstimate(_ prepTime: Int?) {
+		guard let prepTime = prepTime else { return }
+		DispatchQueue.main.async {
 			self.performSegue(withIdentifier: "SubmitOrderSegue", sender: prepTime)
 		}
 	}

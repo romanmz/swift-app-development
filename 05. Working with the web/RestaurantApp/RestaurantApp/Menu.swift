@@ -9,9 +9,15 @@
 import Foundation
 
 
+// Menu items (for remote responses)
+// ------------------------------
 struct MenuItems: Codable {
 	let items: [MenuItem]
 }
+
+
+// Menu item
+// ------------------------------
 struct MenuItem: Codable {
 	let id: Int
 	let name: String
@@ -29,14 +35,5 @@ struct MenuItem: Codable {
 		case price
 		case category
 		case imageURL = "image_url"
-	}
-}
-struct Order: Codable {
-	var menuItems: [MenuItem] = []
-}
-struct PreparationTime: Codable {
-	let prepTime: Int
-	enum CodingKeys: String, CodingKey {
-		case prepTime = "preparation_time"
 	}
 }

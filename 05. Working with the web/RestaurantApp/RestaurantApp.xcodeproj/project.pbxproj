@@ -19,6 +19,8 @@
 		307725F3223C27F300757CBB /* MenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F2223C27F300757CBB /* MenuItemViewController.swift */; };
 		307725F5223C393E00757CBB /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F4223C393E00757CBB /* OrderViewController.swift */; };
 		307725F7223C584200757CBB /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F6223C584200757CBB /* ConfirmationViewController.swift */; };
+		307725FA223C5E9200757CBB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F9223C5E9200757CBB /* Helpers.swift */; };
+		307725FC223C619C00757CBB /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725FB223C619C00757CBB /* Order.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		307725F2223C27F300757CBB /* MenuItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemViewController.swift; sourceTree = "<group>"; };
 		307725F4223C393E00757CBB /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		307725F6223C584200757CBB /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		307725F9223C5E9200757CBB /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		307725FB223C619C00757CBB /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 				30431ABE223B244500B870CD /* Controllers */,
 				30431AB7223B1B4300B870CD /* Info.plist */,
 				30431AAB223B1B4300B870CD /* AppDelegate.swift */,
+				307725F9223C5E9200757CBB /* Helpers.swift */,
 				30431AB2223B1B4300B870CD /* Assets.xcassets */,
 				30431AB4223B1B4300B870CD /* LaunchScreen.storyboard */,
 				30431AAF223B1B4300B870CD /* Main.storyboard */,
@@ -96,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				30431AC6223B27C900B870CD /* Menu.swift */,
+				307725FB223C619C00757CBB /* Order.swift */,
 				30431AC4223B258600B870CD /* MenuData.swift */,
 			);
 			name = Models;
@@ -183,6 +189,8 @@
 				30431AC9223B8BD700B870CD /* CategoryViewController.swift in Sources */,
 				30431AC5223B258600B870CD /* MenuData.swift in Sources */,
 				30431AAC223B1B4300B870CD /* AppDelegate.swift in Sources */,
+				307725FA223C5E9200757CBB /* Helpers.swift in Sources */,
+				307725FC223C619C00757CBB /* Order.swift in Sources */,
 				307725F7223C584200757CBB /* ConfirmationViewController.swift in Sources */,
 				307725F1223C138700757CBB /* MenuItemCell.swift in Sources */,
 				307725F3223C27F300757CBB /* MenuItemViewController.swift in Sources */,
