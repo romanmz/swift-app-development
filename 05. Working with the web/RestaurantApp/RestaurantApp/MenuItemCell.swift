@@ -14,6 +14,9 @@ class MenuItemCell: UITableViewCell {
 	// Properties
 	// ------------------------------
 	let placeholderImage = UIImage(named: "Placeholder")
+	@IBOutlet weak var thumbnailImage: UIImageView!
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var priceLabel: UILabel!
 	
 	
 	// Populate content
@@ -21,17 +24,18 @@ class MenuItemCell: UITableViewCell {
 	func update(with menuItem: MenuItem, at indexPath: IndexPath, in view: UITableViewController) {
 		
 		// Update labels
-		textLabel?.text = menuItem.name
-		detailTextLabel?.text = menuItem.formattedPrice
-		imageView?.image = placeholderImage
+		thumbnailImage.image = placeholderImage
+		nameLabel.text = menuItem.name
+		priceLabel.text = menuItem.formattedPrice
 		
 		// Load image
 		MenuData.fetchImage(url: menuItem.imageURL) {
 			image in
-			guard let image = image,
-				view.tableView.indexPath(for: self) == indexPath else { return }
+			guard let image = image else { return }
 			DispatchQueue.main.async {
-				self.imageView?.image = image
+				// Since this is an asynchronous call, we need to ensure we're still modifying the correct cell
+				guard view.tableView.indexPath(for: self) == indexPath else { return }
+				self.thumbnailImage.image = image
 				self.setNeedsLayout()
 			}
 		}
