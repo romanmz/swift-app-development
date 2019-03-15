@@ -19,7 +19,9 @@ struct MenuItem: Codable {
 	let price: Double
 	let category: String
 	let imageURL: URL
-	
+	var formattedPrice: String {
+		return String(format: "$%.2f", self.price)
+	}
 	enum CodingKeys: String, CodingKey {
 		case id
 		case name

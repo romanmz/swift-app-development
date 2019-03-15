@@ -77,7 +77,7 @@ class MenuData {
 	}
 	
 	
-	// Fetch Entire Menu
+	// Fetch entire menu
 	// ------------------------------
 	static func fetchMenuItems() {
 		
@@ -97,6 +97,23 @@ class MenuData {
 		// Submit request
 		networkRequestStarted()
 		let task = URLSession.shared.dataTask(with: menuURL, completionHandler: callback)
+		task.resume()
+	}
+	
+	
+	// Fetch image
+	// ------------------------------
+	static func fetchImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+		networkRequestStarted()
+		let task = URLSession.shared.dataTask(with: url) {
+			(data, _, _) in
+			self.networkRequestFinished()
+			if let data = data, let image = UIImage(data: data) {
+				completion(image)
+				return
+			}
+			completion(nil)
+		}
 		task.resume()
 	}
 	

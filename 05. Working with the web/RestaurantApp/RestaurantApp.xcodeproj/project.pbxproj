@@ -14,6 +14,8 @@
 		30431AC0223B246300B870CD /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30431ABF223B246300B870CD /* CategoriesViewController.swift */; };
 		30431AC5223B258600B870CD /* MenuData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30431AC4223B258600B870CD /* MenuData.swift */; };
 		30431AC7223B27C900B870CD /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30431AC6223B27C900B870CD /* Menu.swift */; };
+		30431AC9223B8BD700B870CD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30431AC8223B8BD700B870CD /* CategoryViewController.swift */; };
+		307725F1223C138700757CBB /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307725F0223C138700757CBB /* MenuItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		30431ABF223B246300B870CD /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		30431AC4223B258600B870CD /* MenuData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuData.swift; sourceTree = "<group>"; };
 		30431AC6223B27C900B870CD /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		30431AC8223B8BD700B870CD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		307725F0223C138700757CBB /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +77,9 @@
 			isa = PBXGroup;
 			children = (
 				30431AC4223B258600B870CD /* MenuData.swift */,
+				307725F0223C138700757CBB /* MenuItemCell.swift */,
 				30431ABF223B246300B870CD /* CategoriesViewController.swift */,
+				30431AC8223B8BD700B870CD /* CategoryViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -157,8 +163,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30431AC9223B8BD700B870CD /* CategoryViewController.swift in Sources */,
 				30431AC5223B258600B870CD /* MenuData.swift in Sources */,
 				30431AAC223B1B4300B870CD /* AppDelegate.swift in Sources */,
+				307725F1223C138700757CBB /* MenuItemCell.swift in Sources */,
 				30431AC0223B246300B870CD /* CategoriesViewController.swift in Sources */,
 				30431AC7223B27C900B870CD /* Menu.swift in Sources */,
 			);
