@@ -13,7 +13,7 @@
         <!--Your Order-->
         <scene sceneID="KlA-Pa-Cfj">
             <objects>
-                <tableViewController id="rgi-ge-1wG" customClass="OrderViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="OrderView" id="rgi-ge-1wG" customClass="OrderViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cyC-xo-Ndj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,7 +137,7 @@
         <!--Your Order-->
         <scene sceneID="oD1-bC-LrP">
             <objects>
-                <navigationController id="fhe-wg-Bvd" userLabel="Your Order" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="OrderNavigation" id="fhe-wg-Bvd" userLabel="Your Order" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Your Order" image="O" id="PMz-IT-6DR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DrH-QG-t9V">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -154,7 +154,7 @@
         <!--Categories-->
         <scene sceneID="1r6-Jo-9cp">
             <objects>
-                <tableViewController id="bia-mb-hzc" userLabel="Categories" customClass="CategoriesViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="MenuCategories" id="bia-mb-hzc" userLabel="Categories" customClass="CategoriesViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yzm-02-Iae">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,7 +195,7 @@
         <!--Category-->
         <scene sceneID="sGg-Vt-1mg">
             <objects>
-                <tableViewController id="lRk-Qb-Kkw" customClass="CategoryViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="MenuCategory" id="lRk-Qb-Kkw" customClass="CategoryViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HrW-YP-Jfx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -264,7 +264,7 @@
         <!--Menu Item-->
         <scene sceneID="vfK-Nn-rvf">
             <objects>
-                <viewController id="kLU-3H-HIg" userLabel="Menu Item" customClass="MenuItemViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MenuItem" id="kLU-3H-HIg" userLabel="Menu Item" customClass="MenuItemViewController" customModule="RestaurantApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nuh-jj-du8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -357,7 +357,7 @@
         <!--Menu-->
         <scene sceneID="gtf-bK-TKW">
             <objects>
-                <navigationController id="WUf-of-yjS" userLabel="Menu" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="MenuNavigation" id="WUf-of-yjS" userLabel="Menu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Menu" image="M" id="TwE-La-GMQ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Ph2-gJ-lAg">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
@@ -374,7 +374,7 @@
         <!--Tabs-->
         <scene sceneID="ubX-i2-WEg">
             <objects>
-                <tabBarController id="QTI-1q-VoQ" userLabel="Tabs" sceneMemberID="viewController">
+                <tabBarController restorationIdentifier="Root" id="QTI-1q-VoQ" userLabel="Tabs" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wT7-ka-ddb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -88,7 +88,6 @@ class OrderViewController: UITableViewController {
 	// Come back
 	// ------------------------------
 	@IBAction func unwindToOrderView(segue: UIStoryboardSegue) {
-		MenuData.order.menuItems = []
 	}
 	
 	

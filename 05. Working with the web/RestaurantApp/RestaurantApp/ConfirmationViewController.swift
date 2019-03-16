@@ -18,6 +18,7 @@ class ConfirmationViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		confirmationMessageLabel.text = "Your order will be ready in \(prepTime!) minutes"
+		MenuData.order.menuItems.removeAll()
 	}
 	
 	

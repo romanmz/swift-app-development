@@ -13,7 +13,11 @@ class MenuItemViewController: UIViewController {
 	
 	// Properties
 	// ------------------------------
-	var menuItem: MenuItem!
+	var menuItem: MenuItem! {
+		didSet {
+			updateUI()
+		}
+	}
 	let placeholderImage = UIImage(named: "Placeholder")
 	@IBOutlet weak var mainImage: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
@@ -31,6 +35,9 @@ class MenuItemViewController: UIViewController {
 		updateUI()
 	}
 	@objc func updateUI() {
+		// Check that view has been loaded (for when this is triggered by a notification or segue)
+		// and also that "menuItem" has already been defined (for when state restoration is still pending)
+		guard isViewLoaded, menuItem != nil else { return }
 		
 		// View
 		navigationItem.title = menuItem.name
@@ -65,6 +72,20 @@ class MenuItemViewController: UIViewController {
 			self.addToOrderButton.transform = CGAffineTransform.identity
 		}
 		MenuData.order.menuItems.append(menuItem)
+	}
+	
+	
+	// State preservation
+	// ------------------------------
+	override func encodeRestorableState(with coder: NSCoder) {
+		super.encodeRestorableState(with: coder)
+		coder.encode(menuItem.id, forKey: "menuItemId")
+	}
+	override func decodeRestorableState(with coder: NSCoder) {
+		super.decodeRestorableState(with: coder)
+		let id = Int(coder.decodeInt32(forKey: "menuItemId"))
+		guard let menuItem = MenuData.getMenuItem(withID: id) else { return }
+		self.menuItem = menuItem
 	}
 	
 	

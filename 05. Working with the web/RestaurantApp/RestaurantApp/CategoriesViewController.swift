@@ -15,7 +15,9 @@ class CategoriesViewController: UITableViewController {
 	// ------------------------------
 	var categories: [String]! {
 		didSet {
-			tableView.reloadData()
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 		}
 	}
 	

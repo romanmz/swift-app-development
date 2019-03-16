@@ -81,3 +81,29 @@ if
 
 // If you're also implementing data persistence then you can load the stored data immediately on launch so users won't have to wait to use the app
 // but at the same time request the updated data from the remote server so users can see the most up to date information as soon as possible
+
+
+// State preservation
+// ------------------------------
+// To enable state preservation on a view:
+// 1. Enter a name on its "Restoration ID" property on the Identity Inspector
+//    leave it empty for views which should NOT have state preservation, such as payment confirmation screens
+// 2. Call and return true on the AppDelegate methods "application(_:shouldSaveApplicationState:)" and "application(_:shouldRestoreApplicationState:)"
+
+// Everything will work automatically on views that always display the same content,
+// but for dynamic views you'll need to take extra steps to make sure the correct data is loaded on state restoration:
+// 1. Override the encodeRestorableState(with:) and decodeRestorableState(with:) methods on the relevant view controller
+// 2. Those methods will receive a NSCoder object, you can call its "encode" and "decode" methods to save and load data from the saved state
+// NOTE:
+// Be aware that those state restoration hooks run after the viewDidLoad event, so there will be issues
+// if your initializer code depends on variables that are yet to be loaded by the state restoration function, to fix this:
+// - rewrite the controller to use regular optionals instead, or
+// - guard against myOptional != nil before using them
+
+// To test on the simulator:
+// 1. Go back to the home screen
+// 2. Wait a little bit
+// 3. Stop the project from running
+
+// Force quitting the app doesn't work on either the simulator or real devices,
+// this is because users could have force quitted the app because it crashed and we wouldn't want it to return to that bad state

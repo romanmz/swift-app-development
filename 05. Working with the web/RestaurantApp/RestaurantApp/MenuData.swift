@@ -38,8 +38,13 @@ class MenuData {
 			NotificationCenter.default.post(name: self.menuUpdatedNotification, object: nil)
 		}
 	}
-	static func getMenuItems(withID id: Int) -> [MenuItem] {
-		return menuItems.filter { item in item.id == id }
+	static func getMenuItem(withID id: Int) -> MenuItem? {
+		for item in menuItems {
+			if item.id == id {
+				return item
+			}
+		}
+		return nil
 	}
 	static func getMenuItems(withCategory category: String) -> [MenuItem] {
 		return menuItems.filter { item in item.category == category }

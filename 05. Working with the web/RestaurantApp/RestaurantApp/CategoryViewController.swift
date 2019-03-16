@@ -13,10 +13,16 @@ class CategoryViewController: UITableViewController {
 	
 	// Properties
 	// ------------------------------
-	var category: String!
-	var menuItems: [MenuItem]! {
+	var category: String! {
 		didSet {
-			tableView.reloadData()
+			updateUI()
+		}
+	}
+	var menuItems: [MenuItem] = [] {
+		didSet {
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 		}
 	}
 	
@@ -25,11 +31,14 @@ class CategoryViewController: UITableViewController {
 	// ------------------------------
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationItem.title = category.capitalized
-		NotificationCenter.default.addObserver(self, selector: #selector(updateMenuItems), name: MenuData.menuUpdatedNotification, object: nil)
-		updateMenuItems()
+		NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: MenuData.menuUpdatedNotification, object: nil)
+		updateUI()
 	}
-	@objc func updateMenuItems() {
+	@objc func updateUI() {
+		// Check that view has been loaded (for when this is triggered by a notification or segue)
+		// and also that "category" has already been defined (for when state restoration is still pending)
+		guard isViewLoaded, category != nil else { return }
+		navigationItem.title = category.capitalized
 		menuItems = MenuData.getMenuItems(withCategory: category)
 	}
 	
@@ -60,6 +69,18 @@ class CategoryViewController: UITableViewController {
 			let menuItemView = segue.destination as? MenuItemViewController,
 			let selectedIndex = tableView.indexPathForSelectedRow else { return }
 		menuItemView.menuItem = menuItems[selectedIndex.row]
+	}
+	
+	
+	// State preservation
+	// ------------------------------
+	override func encodeRestorableState(with coder: NSCoder) {
+		super.encodeRestorableState(with: coder)
+		coder.encode(category, forKey: "category")
+	}
+	override func decodeRestorableState(with coder: NSCoder) {
+		super.decodeRestorableState(with: coder)
+		category = coder.decodeObject(forKey: "category") as? String
 	}
 	
 	
