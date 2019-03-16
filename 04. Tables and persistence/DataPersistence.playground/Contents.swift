@@ -10,11 +10,21 @@ struct Note: Codable {
 	let title: String
 	let text: String
 	let timestamp: Date
+	// enum CodingKeys: String, CodingKey
 }
 let note1 = Note(title: "Note One", text: "This is a sample note.", timestamp: Date())
 let note2 = Note(title: "Note Two", text: "This is another sample note.", timestamp: Date())
 let note3 = Note(title: "Note Three", text: "This is yet another sample note.", timestamp: Date())
 let notes = [note1, note2, note3]
+
+
+// Manually converting JSON objects
+// ------------------------------
+// 1. Convert raw data into a json object using the JSONSerialization.jsonObject() method
+// 2. then cast that json object into a [[String: Any]] dictionary
+// 3. then you pass each element of the dictionary to your custom type initializer, which should be able to handle dict elements
+// 4. Then you just map the dict keys to properties of your type as required
+// Check out the "NetworkRequests" project for a working example
 
 
 // FileManager class
@@ -24,6 +34,13 @@ let notes = [note1, note2, note3]
 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let archiveURL = documentsDirectory.appendingPathComponent("notes_test").appendingPathExtension("plist")
 print(archiveURL)
+
+
+// URLCache: Setting up cache settings
+// ------------------------------
+let tempDir = NSTemporaryDirectory()
+let urlCache = URLCache(memoryCapacity: 25_000_000, diskCapacity: 50_000_000, diskPath: tempDir)
+URLCache.shared = urlCache
 
 
 // Encoder/Decoder: Property Lists (.plist files)

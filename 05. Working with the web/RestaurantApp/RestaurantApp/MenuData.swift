@@ -135,7 +135,7 @@ class MenuData {
 		// Prepare data to be sent
 		let menuIds = order.menuItems.map { $0.id }
 		let data: [String: [Int]] = ["menuIds": menuIds]
-		let jsonData = try? self.encoder.encode(data)
+		let jsonData = try? encoder.encode(data)
 		request.httpBody = jsonData
 		
 		// Fetch data
@@ -153,6 +153,39 @@ class MenuData {
 			completion(time.prepTime)
 		}
 		task.resume()
+	}
+	
+	
+	// Persistent data
+	// ------------------------------
+	static var documentsURL: URL {
+		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+	}
+	
+	// Orders
+	static var orderFileURL: URL {
+		return documentsURL.appendingPathComponent("order").appendingPathExtension("json")
+	}
+	static func loadOrderFromFile() {
+		guard let data = try? Data(contentsOf: orderFileURL) else { return }
+		order = (try? decoder.decode(Order.self, from: data)) ?? Order(menuItems:[])
+	}
+	static func saveOrderToFile() {
+		guard let data = try? encoder.encode(order) else { return }
+		try? data.write(to: orderFileURL)
+	}
+	
+	// Menu items
+	static var menuItemsFileURL: URL {
+		return documentsURL.appendingPathComponent("menuItems").appendingPathExtension("json")
+	}
+	static func loadItemsFromFile() {
+		guard let data = try? Data(contentsOf: menuItemsFileURL) else { return }
+		menuItems = (try? decoder.decode([MenuItem].self, from: data)) ?? []
+	}
+	static func saveItemsToFile() {
+		guard let data = try? encoder.encode(menuItems) else { return }
+		try? data.write(to: menuItemsFileURL)
 	}
 	
 	
