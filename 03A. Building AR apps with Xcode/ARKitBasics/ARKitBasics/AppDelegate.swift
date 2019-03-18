@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  ARKit-Template
+//  ARKitBasics
 //
-//  Created by Román Martínez on 3/1/19.
+//  Created by Román Martínez on 3/17/19.
 //  Copyright © 2019 Román Martínez. All rights reserved.
 //
 

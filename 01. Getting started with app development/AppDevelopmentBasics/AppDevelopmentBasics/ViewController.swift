@@ -122,5 +122,8 @@ class ViewController: UIViewController {
 	// NSAppTransportSecurity: Lists all security settings
 	//     NSAllowsArbitraryLoads: Defines whether or not unsafe (not https) requests are allowed
 	
+	// Hide status bar:
+	// UIStatusBarHidden
+	
 	
 }
