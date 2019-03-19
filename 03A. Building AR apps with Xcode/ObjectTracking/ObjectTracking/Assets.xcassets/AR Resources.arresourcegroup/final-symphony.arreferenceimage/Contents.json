@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "voces-del-desierto.jpg"
+      "filename" : "final-symphony.jpg"
     }
   ],
   "info" : {
@@ -10,7 +10,7 @@
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 15.5,
+    "width" : 14,
     "unit" : "centimeters"
   }
 }

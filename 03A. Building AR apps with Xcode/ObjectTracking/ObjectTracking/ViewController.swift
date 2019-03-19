@@ -26,6 +26,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 		let configuration = ARWorldTrackingConfiguration()
 		// Setup object tracking
 		setupObjectsTracking(configuration)
+		// Setup image tracking
+		setupImageTracking(configuration)
+		//
 		sceneView.session.run(configuration)
 	}
 	override func viewWillDisappear(_ animated: Bool) {
@@ -48,6 +51,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 		switch anchor {
 		case is ARPlaneAnchor:
 			addPlane(to: node, using: anchor as! ARPlaneAnchor)
+		case is ARImageAnchor:
+			addPlane(to: node, using: anchor as! ARImageAnchor)
 		default:
 			break
 		}
@@ -85,6 +90,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 		guard let plane = planeNode.geometry as? SCNPlane else { return }
 		plane.width = CGFloat(anchor.extent.x)
 		plane.height = CGFloat(anchor.extent.z)
+	}
+	
+	
+	// Image detection
+	// ------------------------------
+	// 1. Go to the Assets Catalog and create a new "AR Resource Group", a new folder named "AR Resources" will be created
+	// 2. Add all images that should be detected and tracked by ARKit into this folder
+	// 3. You need to specify the real-world size of each image
+	func setupImageTracking(_ config: ARWorldTrackingConfiguration) {
+		let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)!
+		config.detectionImages = referenceImages
+	}
+	func addPlane(to node: SCNNode, using anchor: ARImageAnchor) {
+		let detectedImage = anchor.referenceImage
+		let planeNode = SCNNode()
+		let plane = SCNPlane(width: detectedImage.physicalSize.width, height: detectedImage.physicalSize.height)
+		planeNode.geometry = plane
+		planeNode.opacity = 0.25
+		planeNode.eulerAngles.x -= .pi / 2
+		plane.firstMaterial?.diffuse.contents = UIColor.red
+		plane.firstMaterial?.isDoubleSided = true
+		node.addChildNode(planeNode)
 	}
 	
 	
