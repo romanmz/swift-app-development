@@ -75,6 +75,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 		planeNode.geometry = plane
 		planeNode.eulerAngles.x = -.pi / 2
 		planeNode.opacity = 0.25
+		plane.firstMaterial?.diffuse.contents = anchor.alignment == .vertical ? UIColor.white : UIColor.yellow
+		plane.firstMaterial?.isDoubleSided = true
 		node.addChildNode(planeNode)
 	}
 	func updatePlane(on node: SCNNode, using anchor: ARPlaneAnchor) {

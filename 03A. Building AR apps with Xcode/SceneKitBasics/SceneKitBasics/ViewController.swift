@@ -152,4 +152,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 		node.geometry = sphere
 		return node
 	}
+	
+	
+	// Physics
+	// ------------------------------
+	// Check out the "TouchDetectionInAR" project for basic examples of physics simulation on SceneKit and AR
+	
+	
 }
