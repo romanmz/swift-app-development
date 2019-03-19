@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3037C3112240B57C00841072 /* TouchDetectionInAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchDetectionInAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3037C3112240B57C00841072 /* ARDynamicsBasics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARDynamicsBasics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3037C3142240B57C00841072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3037C3162240B57C00841072 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		3037C3182240B57C00841072 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 		3037C3082240B57C00841072 = {
 			isa = PBXGroup;
 			children = (
-				3037C3132240B57C00841072 /* TouchDetectionInAR */,
+				3037C3132240B57C00841072 /* ARDynamicsBasics */,
 				3037C3122240B57C00841072 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,12 +48,12 @@
 		3037C3122240B57C00841072 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3037C3112240B57C00841072 /* TouchDetectionInAR.app */,
+				3037C3112240B57C00841072 /* ARDynamicsBasics.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3037C3132240B57C00841072 /* TouchDetectionInAR */ = {
+		3037C3132240B57C00841072 /* ARDynamicsBasics */ = {
 			isa = PBXGroup;
 			children = (
 				3037C3222240B57D00841072 /* Info.plist */,
@@ -64,15 +64,15 @@
 				3037C31F2240B57D00841072 /* LaunchScreen.storyboard */,
 				3037C31A2240B57C00841072 /* Main.storyboard */,
 			);
-			path = TouchDetectionInAR;
+			path = ARDynamicsBasics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3037C3102240B57C00841072 /* TouchDetectionInAR */ = {
+		3037C3102240B57C00841072 /* ARDynamicsBasics */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3037C3252240B57D00841072 /* Build configuration list for PBXNativeTarget "TouchDetectionInAR" */;
+			buildConfigurationList = 3037C3252240B57D00841072 /* Build configuration list for PBXNativeTarget "ARDynamicsBasics" */;
 			buildPhases = (
 				3037C30D2240B57C00841072 /* Sources */,
 				3037C30E2240B57C00841072 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = TouchDetectionInAR;
-			productName = TouchDetectionInAR;
-			productReference = 3037C3112240B57C00841072 /* TouchDetectionInAR.app */;
+			name = ARDynamicsBasics;
+			productName = ARDynamicsBasics;
+			productReference = 3037C3112240B57C00841072 /* ARDynamicsBasics.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3037C30C2240B57C00841072 /* Build configuration list for PBXProject "TouchDetectionInAR" */;
+			buildConfigurationList = 3037C30C2240B57C00841072 /* Build configuration list for PBXProject "ARDynamicsBasics" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3037C3102240B57C00841072 /* TouchDetectionInAR */,
+				3037C3102240B57C00841072 /* ARDynamicsBasics */,
 			);
 		};
 /* End PBXProject section */
@@ -288,12 +288,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D8G9332Y2E;
-				INFOPLIST_FILE = TouchDetectionInAR/Info.plist;
+				INFOPLIST_FILE = ARDynamicsBasics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = romanmz.TouchDetectionInAR;
+				PRODUCT_BUNDLE_IDENTIFIER = romanmz.ARDynamicsBasics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -306,12 +306,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D8G9332Y2E;
-				INFOPLIST_FILE = TouchDetectionInAR/Info.plist;
+				INFOPLIST_FILE = ARDynamicsBasics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = romanmz.TouchDetectionInAR;
+				PRODUCT_BUNDLE_IDENTIFIER = romanmz.ARDynamicsBasics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -321,7 +321,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3037C30C2240B57C00841072 /* Build configuration list for PBXProject "TouchDetectionInAR" */ = {
+		3037C30C2240B57C00841072 /* Build configuration list for PBXProject "ARDynamicsBasics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3037C3232240B57D00841072 /* Debug */,
@@ -330,7 +330,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3037C3252240B57D00841072 /* Build configuration list for PBXNativeTarget "TouchDetectionInAR" */ = {
+		3037C3252240B57D00841072 /* Build configuration list for PBXNativeTarget "ARDynamicsBasics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3037C3262240B57D00841072 /* Debug */,

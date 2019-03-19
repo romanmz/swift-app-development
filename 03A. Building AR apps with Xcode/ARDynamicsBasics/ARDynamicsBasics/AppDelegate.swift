@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  TouchDetectionInAR
+//  ARDynamicsBasics
 //
 //  Created by Román Martínez on 3/18/19.
 //  Copyright © 2019 Román Martínez. All rights reserved.
