@@ -23,8 +23,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 	
 	// SCN Assets folder
 	// ------------------------------
-	// To include .scn files into your application, it's better to use assets folders with a .scnassets extension instead of the default .xcassets
-	// to create one go to File > New > File, pick the "Asset Catalog" option, and when naming it make sure you add the .scnassets extension
+	// To include .scn files into an AR application, it's better to use SceneKit Catalogs instead of the regular Assets Catalogs
+	// to create one go to File > New > File and pick the "SceneKit Catalog" option
 	
 	
 	// Setup AR Scene
