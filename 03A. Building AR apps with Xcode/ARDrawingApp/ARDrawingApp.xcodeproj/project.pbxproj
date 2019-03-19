@@ -8,22 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		30772629223F161E00757CBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30772628223F161E00757CBB /* AppDelegate.swift */; };
-		3077262B223F161E00757CBB /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3077262A223F161E00757CBB /* art.scnassets */; };
 		3077262D223F161E00757CBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3077262C223F161E00757CBB /* ViewController.swift */; };
 		30772630223F161E00757CBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3077262E223F161E00757CBB /* Main.storyboard */; };
 		30772632223F161F00757CBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30772631223F161F00757CBB /* Assets.xcassets */; };
 		30772635223F161F00757CBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30772633223F161F00757CBB /* LaunchScreen.storyboard */; };
+		30775F5F2241941B00E81E2A /* Options.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30775F5E2241941B00E81E2A /* Options.storyboard */; };
+		30775F612241951300E81E2A /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F602241951300E81E2A /* OptionsViewController.swift */; };
+		30775F632241988E00E81E2A /* OptionSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F622241988E00E81E2A /* OptionSelectorViewController.swift */; };
+		30775F652241993500E81E2A /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F642241993500E81E2A /* Options.swift */; };
+		30775F6722419BCD00E81E2A /* MenuOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F6622419BCD00E81E2A /* MenuOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		30772625223F161E00757CBB /* ARDrawingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARDrawingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30772628223F161E00757CBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3077262A223F161E00757CBB /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		3077262C223F161E00757CBB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3077262F223F161E00757CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30772631223F161F00757CBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30772634223F161F00757CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30772636223F161F00757CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30775F5E2241941B00E81E2A /* Options.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Options.storyboard; sourceTree = "<group>"; };
+		30775F602241951300E81E2A /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		30775F622241988E00E81E2A /* OptionSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectorViewController.swift; sourceTree = "<group>"; };
+		30775F642241993500E81E2A /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		30775F6622419BCD00E81E2A /* MenuOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +64,8 @@
 		30772627223F161E00757CBB /* ARDrawingApp */ = {
 			isa = PBXGroup;
 			children = (
+				30775F5D224193FD00E81E2A /* Options */,
 				30772636223F161F00757CBB /* Info.plist */,
-				3077262A223F161E00757CBB /* art.scnassets */,
 				30772628223F161E00757CBB /* AppDelegate.swift */,
 				3077262C223F161E00757CBB /* ViewController.swift */,
 				30772631223F161F00757CBB /* Assets.xcassets */,
@@ -65,6 +73,18 @@
 				3077262E223F161E00757CBB /* Main.storyboard */,
 			);
 			path = ARDrawingApp;
+			sourceTree = "<group>";
+		};
+		30775F5D224193FD00E81E2A /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				30775F5E2241941B00E81E2A /* Options.storyboard */,
+				30775F602241951300E81E2A /* OptionsViewController.swift */,
+				30775F622241988E00E81E2A /* OptionSelectorViewController.swift */,
+				30775F642241993500E81E2A /* Options.swift */,
+				30775F6622419BCD00E81E2A /* MenuOptions.swift */,
+			);
+			path = Options;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3077262B223F161E00757CBB /* art.scnassets in Resources */,
+				30775F5F2241941B00E81E2A /* Options.storyboard in Resources */,
 				30772635223F161F00757CBB /* LaunchScreen.storyboard in Resources */,
 				30772632223F161F00757CBB /* Assets.xcassets in Resources */,
 				30772630223F161E00757CBB /* Main.storyboard in Resources */,
@@ -139,8 +159,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30775F612241951300E81E2A /* OptionsViewController.swift in Sources */,
 				3077262D223F161E00757CBB /* ViewController.swift in Sources */,
+				30775F652241993500E81E2A /* Options.swift in Sources */,
+				30775F632241988E00E81E2A /* OptionSelectorViewController.swift in Sources */,
 				30772629223F161E00757CBB /* AppDelegate.swift in Sources */,
+				30775F6722419BCD00E81E2A /* MenuOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
