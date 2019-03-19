@@ -16,7 +16,6 @@
 		30775F612241951300E81E2A /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F602241951300E81E2A /* OptionsViewController.swift */; };
 		30775F632241988E00E81E2A /* OptionSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F622241988E00E81E2A /* OptionSelectorViewController.swift */; };
 		30775F652241993500E81E2A /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F642241993500E81E2A /* Options.swift */; };
-		30775F6722419BCD00E81E2A /* MenuOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F6622419BCD00E81E2A /* MenuOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 		30775F602241951300E81E2A /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		30775F622241988E00E81E2A /* OptionSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectorViewController.swift; sourceTree = "<group>"; };
 		30775F642241993500E81E2A /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
-		30775F6622419BCD00E81E2A /* MenuOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 				30775F602241951300E81E2A /* OptionsViewController.swift */,
 				30775F622241988E00E81E2A /* OptionSelectorViewController.swift */,
 				30775F642241993500E81E2A /* Options.swift */,
-				30775F6622419BCD00E81E2A /* MenuOptions.swift */,
 			);
 			path = Options;
 			sourceTree = "<group>";
@@ -164,7 +161,6 @@
 				30775F652241993500E81E2A /* Options.swift in Sources */,
 				30775F632241988E00E81E2A /* OptionSelectorViewController.swift in Sources */,
 				30772629223F161E00757CBB /* AppDelegate.swift in Sources */,
-				30775F6722419BCD00E81E2A /* MenuOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
