@@ -234,8 +234,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		guard let node = selectedObject?.clone(),
 			let cameraPosition = sceneView.session.currentFrame?.camera.transform else { return }
 		var moveToFront = matrix_identity_float4x4
-		moveToFront.columns.3.z = -0.2
+		moveToFront.columns.3.z = -0.5
 		node.simdTransform = matrix_multiply(cameraPosition, moveToFront)
+		node.eulerAngles = SCNVector3(0, 0, 0)
 		addNodeToRoot(node)
 		placedObjects.append(node)
 	}

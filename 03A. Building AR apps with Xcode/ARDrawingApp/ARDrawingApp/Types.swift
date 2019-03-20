@@ -24,13 +24,13 @@ enum Shape: String {
 		case .box:
 			return SCNBox(width: size, height: size, length: size, chamferRadius: 0.0)
 		case .sphere:
-			return SCNSphere(radius: size)
+			return SCNSphere(radius: size / 2)
 		case .cylinder:
 			return SCNCylinder(radius: size / 2, height: size)
 		case .cone:
 			return SCNCone(topRadius: 0.0, bottomRadius: size / 2, height: size)
 		case .torus:
-			return SCNTorus(ringRadius: size * 1.5, pipeRadius: size * 0.2)
+			return SCNTorus(ringRadius: size / 2, pipeRadius: size * 0.2)
 		}
 	}
 	static var all: [Shape] {
