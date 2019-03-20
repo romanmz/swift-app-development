@@ -8,16 +8,27 @@
 
 import UIKit
 
+
+struct Option {
+	let title: String
+	let callback: ()->Void
+	let showIndicator: Bool
+	init(title: String, callback: @escaping ()->Void, showIndicator: Bool = false) {
+		self.title = title
+		self.callback = callback
+		self.showIndicator = showIndicator
+	}
+}
+
+
 class OptionSelectorViewController: UITableViewController {
 	
 	
 	// Init with list of options
 	// ------------------------------
-	private let options: [MenuOption]
-	private let onSelectCallback: ((MenuOption)->Void)?
-	init(options: [MenuOption], onSelect: ((MenuOption)->Void)?) {
+	private let options: [Option]
+	init(options: [Option]) {
 		self.options = options
-		self.onSelectCallback = onSelect
 		super.init(style: .plain)
 	}
 	required init?(coder aDecoder: NSCoder) {
@@ -40,7 +51,8 @@ class OptionSelectorViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: .default, reuseIdentifier: "Option")
 		let option = options[indexPath.row]
-		cell.textLabel?.text = option.rawValue
+		cell.textLabel?.text = option.title
+		cell.accessoryType = option.showIndicator ? .disclosureIndicator : .none
 		return cell
 	}
 	
@@ -50,7 +62,7 @@ class OptionSelectorViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		let option = options[indexPath.row]
-		onSelectCallback?(option)
+		option.callback()
 	}
 	
 	

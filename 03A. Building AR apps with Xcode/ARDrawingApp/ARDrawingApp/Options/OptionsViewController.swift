@@ -11,6 +11,11 @@ import UIKit
 class OptionsViewController: UIViewController {
 	
 	
+	// Properties
+	// ------------------------------
+	var selectedShape: Shape?
+	
+	
 	// Initialize
 	// ------------------------------
 	override func viewDidLoad() {
@@ -32,22 +37,31 @@ class OptionsViewController: UIViewController {
 	// Option picker
 	// ------------------------------
 	private var optionPicker: UIViewController {
-		return OptionSelectorViewController(options: MenuOption.all, onSelect: optionSelected)
+		return OptionSelectorViewController(options: [
+			Option(title: "Select Basic Shape", callback: { self.nav?.pushViewController(self.shapePicker, animated: true) }, showIndicator: true),
+			Option(title: "Select Scene File", callback: {}, showIndicator: true),
+			Option(title: "Toggle Planes Visibility", callback: {}),
+			Option(title: "Undo Last Shape", callback: {}),
+			Option(title: "Reset Scene", callback: {}),
+		])
 	}
-	private func optionSelected(_ option: MenuOption) {
-		switch option {
-		case .addShape:
-		case .addScene:
-		case .togglePlanes:
-		case .undo:
-		case .reset:
+	
+	
+	// Shape picker
+	// ------------------------------
+	private var shapePicker: UIViewController {
+		let options: [Option] = Shape.all.map { shape in
+			return Option(title: shape.rawValue, callback: {
+				self.selectedShape = shape
+			}, showIndicator: true)
 		}
+		return OptionSelectorViewController(options: options)
 	}
 	
 	
 	// Transition between views
 	// ------------------------------
-	func transition(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil) {
+	private func transition(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil) {
 		
 		// Check if this is the first view controller
 		guard let currentController = children.last else {
@@ -55,8 +69,17 @@ class OptionsViewController: UIViewController {
 			return
 		}
 		
+		// Transition between views
+		addChild(viewController)
+		currentController.willMove(toParent: nil)
+		transition(from: currentController, to: viewController, duration: 0.3, options: [.transitionCrossDissolve], animations: {}) {
+			done in
+			currentController.removeFromParent()
+			viewController.didMove(toParent: self)
+			completion?(done)
+		}
 	}
-	func presentFirst(viewController: UIViewController, completion: ((Bool) -> Void)? = nil) {
+	private func presentFirst(viewController: UIViewController, completion: ((Bool) -> Void)? = nil) {
 		
 		// Prepare root view
 		let newView = viewController.view!
