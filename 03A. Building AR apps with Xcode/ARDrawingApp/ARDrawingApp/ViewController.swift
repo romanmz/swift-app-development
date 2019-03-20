@@ -23,10 +23,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		let configuration = ARWorldTrackingConfiguration()
-		setupPlaneDetection(configuration)
-		setupImageDetection(configuration)
-		sceneView.session.run(configuration)
+		sceneView.session.run(self.ARConfig)
 	}
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
@@ -34,7 +31,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	}
 	
 	
-	// Get settings from options menu
+	// Manage AR session configuration
+	// ------------------------------
+	var ARConfig: ARWorldTrackingConfiguration {
+		let config = ARWorldTrackingConfiguration()
+		setupPlaneDetection(config)
+		setupImageDetection(config)
+		return config
+	}
+	
+	
+	// Setting: Selected node
 	// ------------------------------
 	var selectedNode: SCNNode?
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,6 +57,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	
 	// Object tracking
 	// ------------------------------
+	
+	// Delegate methods
 	func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 		switch anchor {
 		case is ARPlaneAnchor: addPlane(to: node, using: anchor as! ARPlaneAnchor)
@@ -64,9 +73,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		}
 	}
 	
-	
-	// Enable plane detection
-	// ------------------------------
+	// Plane detection
 	func setupPlaneDetection(_ config: ARWorldTrackingConfiguration) {
 		config.planeDetection = [.horizontal, .vertical]
 	}
@@ -88,9 +95,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		plane.height = CGFloat(anchor.extent.z)
 	}
 	
-	
-	// Enable image detection
-	// ------------------------------
+	// Image detection
 	func setupImageDetection(_ config: ARWorldTrackingConfiguration) {
 		let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)!
 		config.detectionImages = referenceImages
