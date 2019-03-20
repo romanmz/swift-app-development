@@ -23,7 +23,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		sceneView.session.run(self.ARConfig)
+		resetSession()
 	}
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
@@ -34,12 +34,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	// Manage AR session configuration
 	// ------------------------------
 	var planeNodes: [SCNNode] = []
+	var imageAnchors: [ARImageAnchor] = []
+	func clearImageAnchors() {
+		for anchor in imageAnchors {
+			sceneView.session.remove(anchor: anchor)
+		}
+		imageAnchors.removeAll()
+	}
 	var placedNodes: [SCNNode] = []
-	var ARConfig: ARWorldTrackingConfiguration {
+	var sessionConfig: ARWorldTrackingConfiguration {
 		let config = ARWorldTrackingConfiguration()
 		setupPlaneDetection(config)
-		setupImageDetection(config)
+		if currentMode == .image {
+			setupImageDetection(config)
+		}
 		return config
+	}
+	func resetSession() {
+		let options: ARSession.RunOptions = []//[.resetTracking, .removeExistingAnchors]
+		sceneView.session.run(sessionConfig, options: options)
 	}
 	
 	
@@ -48,7 +61,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	enum placementMode {
 		case freeform, plane, image
 	}
-	var currentMode: placementMode = .freeform
+	var currentMode: placementMode = .freeform {
+		didSet {
+			resetSession()
+		}
+	}
 	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
 		case 0: currentMode = .freeform
@@ -114,7 +131,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		planeNode.opacity = 0.25
 		plane.firstMaterial?.diffuse.contents = color
 		plane.firstMaterial?.isDoubleSided = true
-		planeNodes.append(planeNode)
 		return planeNode
 	}
 	
@@ -128,6 +144,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		let color = anchor.alignment == .vertical ? UIColor.white : UIColor.yellow
 		let planeNode = createPlaneNode(width: width, height: height, color: color)
 		node.addChildNode(planeNode)
+		planeNodes.append(planeNode)
 	}
 	func updatePlane(on node: SCNNode, using anchor: ARPlaneAnchor) {
 		guard let planeNode = node.childNodes.first else { return }
@@ -149,6 +166,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		let color = UIColor.red
 		let planeNode = createPlaneNode(width: width, height: height, color: color)
 		node.addChildNode(planeNode)
+		imageAnchors.append(anchor)
+		// add currently selected node
+		if currentMode == .image {
+			guard let selectedNode = selectedNode else { return }
+			selectedNode.simdTransform = matrix_identity_float4x4
+			addNodeToParent(selectedNode, parent: node)
+		}
 	}
 	
 	
@@ -168,10 +192,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		return distanceBetween(point, lastPoint) >= touchDistanceThreshold
 	}
 	
-	// Place node on the scene
-	func placeNode(_ node: SCNNode) {
+	// Add nodes to the scene
+	func addNodeToScene(_ node: SCNNode) {
 		let newNode = node.clone()
 		sceneView.scene.rootNode.addChildNode(newNode)
+		placedNodes.append(newNode)
+	}
+	func addNodeToParent(_ node: SCNNode, parent: SCNNode) {
+		let newNode = node.clone()
+		parent.addChildNode(newNode)
 		placedNodes.append(newNode)
 	}
 	
@@ -181,7 +210,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		var moveToFront = matrix_identity_float4x4
 		moveToFront.columns.3.z = -0.2
 		node.simdTransform = matrix_multiply(cameraPosition, moveToFront)
-		placeNode(node)
+		addNodeToScene(node)
 	}
 	
 	// Mode: plane
@@ -191,7 +220,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		let transform = result.worldTransform
 		node.position = SCNVector3(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
 		lastObjectPlacedPoint = point
-		placeNode(node)
+		addNodeToScene(node)
 	}
 	
 	
@@ -208,7 +237,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		switch currentMode {
 		case .freeform: placeNodeInFront(node)
 		case .plane: placeNode(node, onPlaneUsing: touchPoint)
-		case .image: break
+		case .image: break // there's no hit test available for image anchors, so we can only hook into the anchor detection event for now
 		}
 	}
 	
