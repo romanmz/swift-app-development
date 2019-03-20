@@ -51,10 +51,10 @@ class OptionsViewController: UIViewController {
 	private var optionPicker: UIViewController {
 		return OptionSelectorViewController(options: [
 			Option(title: "Select Basic Shape", callback: { self.nav?.pushViewController(self.shapePicker, animated: true) }, showIndicator: true),
-			Option(title: "Toggle Planes Visibility", callback: {}),
 			Option(title: "Undo Last Shape", callback: {}),
 			Option(title: "Reset Scene", callback: {}),
 			Option(title: "Select Scene File", callback: { self.nav?.pushViewController(self.scenePicker, animated: true) }, showIndicator: true),
+			Option(title: "Toggle Planes Visibility", callback: { self.delegate?.planesVisibilityToggled() }),
 		])
 	}
 	
@@ -171,4 +171,5 @@ class OptionsViewController: UIViewController {
 // ------------------------------
 protocol OptionsViewControllerDelegate: class {
 	func objectSelected(node: SCNNode)
+	func planesVisibilityToggled()
 }

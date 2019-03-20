@@ -33,6 +33,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	
 	// Manage AR session configuration
 	// ------------------------------
+	var planeNodes: [SCNNode] = []
 	var ARConfig: ARWorldTrackingConfiguration {
 		let config = ARWorldTrackingConfiguration()
 		setupPlaneDetection(config)
@@ -71,10 +72,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	}
 	
 	
+	// Setting: Planes visibility
+	// ------------------------------
+	var planesAreVisible: Bool = true {
+		didSet {
+			for node in planeNodes {
+				node.isHidden = !planesAreVisible
+			}
+		}
+	}
+	func planesVisibilityToggled() {
+		dismiss(animated: true, completion: nil)
+		planesAreVisible = !planesAreVisible
+	}
+	
+	
 	// Object tracking
 	// ------------------------------
 	
-	// Delegate methods
+	// General methods
 	func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 		switch anchor {
 		case is ARPlaneAnchor: addPlane(to: node, using: anchor as! ARPlaneAnchor)
@@ -88,19 +104,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		default: break
 		}
 	}
+	func createPlaneNode(width: CGFloat, height: CGFloat, color: UIColor) -> SCNNode {
+		let planeNode = SCNNode()
+		let plane = SCNPlane(width: width, height: height)
+		planeNode.geometry = plane
+		planeNode.isHidden = !planesAreVisible
+		planeNode.eulerAngles.x = -.pi / 2
+		planeNode.opacity = 0.25
+		plane.firstMaterial?.diffuse.contents = color
+		plane.firstMaterial?.isDoubleSided = true
+		planeNodes.append(planeNode)
+		return planeNode
+	}
 	
 	// Plane detection
 	func setupPlaneDetection(_ config: ARWorldTrackingConfiguration) {
 		config.planeDetection = [.horizontal, .vertical]
 	}
 	func addPlane(to node: SCNNode, using anchor: ARPlaneAnchor) {
-		let planeNode = SCNNode()
-		let plane = SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.z))
-		planeNode.geometry = plane
-		planeNode.eulerAngles.x = -.pi / 2
-		planeNode.opacity = 0.25
-		plane.firstMaterial?.diffuse.contents = anchor.alignment == .vertical ? UIColor.white : UIColor.yellow
-		plane.firstMaterial?.isDoubleSided = true
+		let width = CGFloat(anchor.extent.x)
+		let height = CGFloat(anchor.extent.z)
+		let color = anchor.alignment == .vertical ? UIColor.white : UIColor.yellow
+		let planeNode = createPlaneNode(width: width, height: height, color: color)
 		node.addChildNode(planeNode)
 	}
 	func updatePlane(on node: SCNNode, using anchor: ARPlaneAnchor) {
@@ -117,15 +142,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		config.detectionImages = referenceImages
 	}
 	func addPlane(to node: SCNNode, using anchor: ARImageAnchor) {
-		print("detected image!")
 		let detectedImage = anchor.referenceImage
-		let planeNode = SCNNode()
-		let plane = SCNPlane(width: detectedImage.physicalSize.width, height: detectedImage.physicalSize.height)
-		planeNode.geometry = plane
-		planeNode.opacity = 0.25
-		planeNode.eulerAngles.x -= .pi / 2
-		plane.firstMaterial?.diffuse.contents = UIColor.red
-		plane.firstMaterial?.isDoubleSided = true
+		let width = detectedImage.physicalSize.width
+		let height = detectedImage.physicalSize.height
+		let color = UIColor.red
+		let planeNode = createPlaneNode(width: width, height: height, color: color)
 		node.addChildNode(planeNode)
 	}
 	
