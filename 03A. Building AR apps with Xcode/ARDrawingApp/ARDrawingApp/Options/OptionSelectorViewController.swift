@@ -9,6 +9,8 @@
 import UIKit
 
 
+// Option
+// ------------------------------
 struct Option {
 	let title: String
 	let callback: ()->Void
@@ -64,6 +66,4 @@ class OptionSelectorViewController: UITableViewController {
 		let option = options[indexPath.row]
 		option.callback()
 	}
-	
-	
 }

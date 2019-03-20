@@ -34,6 +34,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	// Manage AR session configuration
 	// ------------------------------
 	var planeNodes: [SCNNode] = []
+	var placedNodes: [SCNNode] = []
 	var ARConfig: ARWorldTrackingConfiguration {
 		let config = ARWorldTrackingConfiguration()
 		setupPlaneDetection(config)
@@ -148,6 +149,80 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		let color = UIColor.red
 		let planeNode = createPlaneNode(width: width, height: height, color: color)
 		node.addChildNode(planeNode)
+	}
+	
+	
+	// Place nodes
+	// ------------------------------
+	
+	// Distance threshold (for plane mode only)
+	var lastObjectPlacedPoint: CGPoint?
+	let touchDistanceThreshold: CGFloat = 20.0
+	func distanceBetween(_ point1: CGPoint, _ point2: CGPoint) -> CGFloat {
+		let a = pow((point1.x - point2.x), 2.0)
+		let b = pow((point1.y - point2.y), 2.0)
+		return sqrt(a + b)
+	}
+	func pointMeetsThreshold(_ point: CGPoint) -> Bool {
+		guard let lastPoint = lastObjectPlacedPoint else { return true }
+		return distanceBetween(point, lastPoint) >= touchDistanceThreshold
+	}
+	
+	// Place node on the scene
+	func placeNode(_ node: SCNNode) {
+		let newNode = node.clone()
+		sceneView.scene.rootNode.addChildNode(newNode)
+		placedNodes.append(newNode)
+	}
+	
+	// Mode: freeform
+	func placeNodeInFront(_ node: SCNNode) {
+		guard let cameraPosition = sceneView.session.currentFrame?.camera.transform else { return }
+		var moveToFront = matrix_identity_float4x4
+		moveToFront.columns.3.z = -0.2
+		node.simdTransform = matrix_multiply(cameraPosition, moveToFront)
+		placeNode(node)
+	}
+	
+	// Mode: plane
+	func placeNode(_ node: SCNNode, onPlaneUsing point: CGPoint) {
+		guard pointMeetsThreshold(point),
+			let result = sceneView.hitTest(point, types: [.existingPlaneUsingExtent]).first else { return }
+		let transform = result.worldTransform
+		node.position = SCNVector3(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+		lastObjectPlacedPoint = point
+		placeNode(node)
+	}
+	
+	
+	// Detect touch
+	// ------------------------------
+	
+	// Start
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		super.touchesBegan(touches, with: event)
+		guard let node = selectedNode,
+			let touch = touches.first else { return }
+		lastObjectPlacedPoint = nil
+		let touchPoint = touch.location(in: sceneView)
+		switch currentMode {
+		case .freeform: placeNodeInFront(node)
+		case .plane: placeNode(node, onPlaneUsing: touchPoint)
+		case .image: break
+		}
+	}
+	
+	// Move
+	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+		super.touchesMoved(touches, with: event)
+		guard let node = selectedNode,
+			let touch = touches.first else { return }
+		let touchPoint = touch.location(in: sceneView)
+		switch currentMode {
+		case .freeform: break
+		case .plane: placeNode(node, onPlaneUsing: touchPoint)
+		case .image: break
+		}
 	}
 	
 	
