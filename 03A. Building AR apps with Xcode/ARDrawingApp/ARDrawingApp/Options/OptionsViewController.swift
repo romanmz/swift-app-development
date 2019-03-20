@@ -7,15 +7,22 @@
 //
 
 import UIKit
+import SceneKit
 
 class OptionsViewController: UIViewController {
 	
 	
 	// Properties
 	// ------------------------------
-	var selectedShape: Shape?
-	var selectedSize: Size?
-	var selectedColor: UIColor?
+	var selectedShape: Shape = .box
+	var selectedSize: Size = .medium
+	var selectedColor: Color = .red
+	var selectedNode: SCNNode {
+		let geometry = selectedShape.createGeometry(size: selectedSize.value)
+		geometry.firstMaterial?.diffuse.contents = selectedColor.value
+		return SCNNode(geometry: geometry)
+	}
+	weak var delegate: OptionsViewControllerDelegate?
 	
 	
 	// Initialize
@@ -80,7 +87,8 @@ class OptionsViewController: UIViewController {
 	private var colorPicker: UIViewController {
 		let options = Color.all.map { color in
 			return Option(title: color.rawValue, callback: {
-				self.selectedColor = color.value
+				self.selectedColor = color
+				self.delegate?.objectSelected(node: self.selectedNode)
 			})
 		}
 		return OptionSelectorViewController(options: options)
@@ -124,6 +132,11 @@ class OptionsViewController: UIViewController {
 			completion?(done)
 		}
 	}
-	
-	
+}
+
+
+// Delegate
+// ------------------------------
+protocol OptionsViewControllerDelegate: class {
+	func objectSelected(node: SCNNode)
 }

@@ -10,7 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewControllerDelegate {
 	
 	
 	// Setup AR scene
@@ -19,7 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		sceneView.delegate = self
-		sceneView.showsStatistics = true
+		sceneView.autoenablesDefaultLighting = true
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -29,6 +29,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		sceneView.session.pause()
+	}
+	
+	
+	// Get settings from options menu
+	// ------------------------------
+	var selectedNode: SCNNode?
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard segue.identifier == "ShowOptionsSegue",
+			let optionsView = segue.destination as? OptionsViewController else { return }
+		optionsView.delegate = self
+	}
+	func objectSelected(node: SCNNode) {
+		dismiss(animated: true, completion: nil)
+		selectedNode = node
 	}
 	
 	
