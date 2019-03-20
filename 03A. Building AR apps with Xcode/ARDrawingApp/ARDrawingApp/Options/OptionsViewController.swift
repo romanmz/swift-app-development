@@ -41,6 +41,7 @@ class OptionsViewController: UIViewController {
 	private var navController: UINavigationController!
 	private func setupNavController() {
 		navController = UINavigationController(rootViewController: optionPicker)
+		navController.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeOptions))
 		
 		// Prepare root view
 		let newView = navController.view!
@@ -56,6 +57,9 @@ class OptionsViewController: UIViewController {
 			self.navController.didMove(toParent: self)
 		}
 	}
+	@objc private func closeOptions() {
+		delegate?.closeOptions()
+	}
 	
 	
 	// Dynamic view controllers
@@ -64,11 +68,11 @@ class OptionsViewController: UIViewController {
 	// Option picker
 	private var optionPicker: UIViewController {
 		return OptionSelectorViewController(options: [
-			Option(title: "Undo Last Shape", callback: {}),
-			Option(title: "Reset Scene", callback: {}),
 			Option(title: "Select Basic Shape", callback: { self.navController.pushViewController(self.shapePicker, animated: true) }, showIndicator: true),
 			Option(title: "Select Scene File", callback: { self.navController.pushViewController(self.scenePicker, animated: true) }, showIndicator: true),
 			Option(title: "Toggle Planes Visibility", callback: { self.delegate?.planesVisibilityToggled() }),
+			Option(title: "Undo Last Shape", callback: { self.delegate?.undoLastObject() }),
+			Option(title: "Reset Scene", callback: { self.delegate?.resetScene() }),
 		])
 	}
 	
@@ -139,4 +143,7 @@ class OptionsViewController: UIViewController {
 protocol OptionsViewControllerDelegate: class {
 	func objectSelected(node: SCNNode)
 	func planesVisibilityToggled()
+	func undoLastObject()
+	func resetScene()
+	func closeOptions()
 }

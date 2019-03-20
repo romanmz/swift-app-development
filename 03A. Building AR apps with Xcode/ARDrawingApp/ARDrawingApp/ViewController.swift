@@ -42,13 +42,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 		imageAnchors.removeAll()
 	}
 	var placedNodes: [SCNNode] = []
-	func resetSession() {
+	func resetSession(clear: Bool = false) {
 		let config = ARWorldTrackingConfiguration()
 		setupPlaneDetection(config)
 		if currentMode == .image && selectedNode != nil {
 			setupImageDetection(config)
 		}
-		let options: ARSession.RunOptions = []//[.resetTracking, .removeExistingAnchors]
+		var options: ARSession.RunOptions = []
+		if clear {
+			options = [.removeExistingAnchors]
+			planeNodes.removeAll()
+			imageAnchors.removeAll()
+			for node in placedNodes {
+				node.removeFromParentNode()
+			}
+			placedNodes.removeAll()
+		}
 		sceneView.session.run(config, options: options)
 	}
 	
@@ -99,6 +108,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	func planesVisibilityToggled() {
 		dismiss(animated: true, completion: nil)
 		planesAreVisible = !planesAreVisible
+	}
+	
+	
+	// Actions: Undo, Reset, Close
+	// ------------------------------
+	func undoLastObject() {
+		guard let lastNode = placedNodes.last else { return }
+		lastNode.removeFromParentNode()
+		placedNodes.removeLast()
+	}
+	func resetScene() {
+		resetSession(clear: true)
+		dismiss(animated: true, completion: nil)
+	}
+	func closeOptions() {
+		dismiss(animated: true, completion: nil)
 	}
 	
 	
