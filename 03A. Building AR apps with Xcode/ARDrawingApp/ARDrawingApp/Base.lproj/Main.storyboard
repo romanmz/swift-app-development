@@ -71,6 +71,9 @@
                                                 <segment title="Image"/>
                                             </segments>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <connections>
+                                                <action selector="segmentedControlChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="fj0-Ij-WaT"/>
+                                            </connections>
                                         </segmentedControl>
                                     </subviews>
                                     <constraints>

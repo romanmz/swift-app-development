@@ -41,6 +41,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	}
 	
 	
+	// Setting: Placement mode
+	// ------------------------------
+	enum placementMode {
+		case freeform, plane, image
+	}
+	var currentMode: placementMode = .freeform
+	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+		switch sender.selectedSegmentIndex {
+		case 0: currentMode = .freeform
+		case 1: currentMode = .plane
+		case 2: currentMode = .image
+		default: break
+		}
+	}
+	
+	
 	// Setting: Selected node
 	// ------------------------------
 	var selectedNode: SCNNode?
