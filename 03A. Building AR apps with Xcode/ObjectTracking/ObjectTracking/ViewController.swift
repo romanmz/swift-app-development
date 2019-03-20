@@ -26,8 +26,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 		let configuration = ARWorldTrackingConfiguration()
 		// Setup object tracking
 		setupObjectsTracking(configuration)
-		// Setup image tracking
-		setupImageTracking(configuration)
 		//
 		sceneView.session.run(configuration)
 	}
@@ -44,27 +42,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 	// Use the "renderer" delegate methods to handle the detection events
 	func setupObjectsTracking(_ config: ARWorldTrackingConfiguration) {
 		setupPlaneDetection(config)
+		setupImageDetection(config)
 	}
 	
 	// This method is triggered whenever an object is first detected
 	func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 		switch anchor {
-		case is ARPlaneAnchor:
-			addPlane(to: node, using: anchor as! ARPlaneAnchor)
-		case is ARImageAnchor:
-			addPlane(to: node, using: anchor as! ARImageAnchor)
-		default:
-			break
+		case is ARPlaneAnchor: addPlane(to: node, using: anchor as! ARPlaneAnchor)
+		case is ARImageAnchor: addPlane(to: node, using: anchor as! ARImageAnchor)
+		default: break
 		}
 	}
 	
 	// This method is triggered whenever an existing object is updated (because the object itself moved, or because ARKit improved its position or dimensions)
 	func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
 		switch anchor {
-		case is ARPlaneAnchor:
-			updatePlane(on: node, using: anchor as! ARPlaneAnchor)
-		default:
-			break
+		case is ARPlaneAnchor: updatePlane(on: node, using: anchor as! ARPlaneAnchor)
+		default: break
 		}
 	}
 	
@@ -98,7 +92,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 	// 1. Go to the Assets Catalog and create a new "AR Resource Group", a new folder named "AR Resources" will be created
 	// 2. Add all images that should be detected and tracked by ARKit into this folder
 	// 3. You need to specify the real-world size of each image
-	func setupImageTracking(_ config: ARWorldTrackingConfiguration) {
+	func setupImageDetection(_ config: ARWorldTrackingConfiguration) {
 		let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)!
 		config.detectionImages = referenceImages
 	}

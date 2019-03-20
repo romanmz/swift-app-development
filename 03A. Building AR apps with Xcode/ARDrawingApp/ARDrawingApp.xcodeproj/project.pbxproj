@@ -70,9 +70,9 @@
 				3077262C223F161E00757CBB /* ViewController.swift */,
 				30A19B642241C068007A8C72 /* Types.swift */,
 				30772631223F161F00757CBB /* Assets.xcassets */,
+				30A19B662241D0F1007A8C72 /* models.scnassets */,
 				30772633223F161F00757CBB /* LaunchScreen.storyboard */,
 				3077262E223F161E00757CBB /* Main.storyboard */,
-				30A19B662241D0F1007A8C72 /* models.scnassets */,
 			);
 			path = ARDrawingApp;
 			sourceTree = "<group>";

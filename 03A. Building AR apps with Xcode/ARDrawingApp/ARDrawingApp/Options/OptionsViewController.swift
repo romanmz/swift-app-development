@@ -31,6 +31,9 @@ class OptionsViewController: UIViewController {
 		super.viewDidLoad()
 		setupNavController()
 	}
+	override func viewWillLayoutSubviews() {
+		preferredContentSize = CGSize(width: 320, height: 600)
+	}
 	
 	
 	// Setup nav controller
