@@ -14,6 +14,7 @@ class OptionsViewController: UIViewController {
 	// Properties
 	// ------------------------------
 	var selectedShape: Shape?
+	var selectedSize: Size?
 	
 	
 	// Initialize
@@ -50,9 +51,22 @@ class OptionsViewController: UIViewController {
 	// Shape picker
 	// ------------------------------
 	private var shapePicker: UIViewController {
-		let options: [Option] = Shape.all.map { shape in
+		let options = Shape.all.map { shape in
 			return Option(title: shape.rawValue, callback: {
 				self.selectedShape = shape
+				self.nav?.pushViewController(self.sizePicker, animated: true)
+			}, showIndicator: true)
+		}
+		return OptionSelectorViewController(options: options)
+	}
+	
+	
+	// Size picker
+	// ------------------------------
+	private var sizePicker: UIViewController {
+		let options = Size.all.map { size in
+			return Option(title: size.rawValue, callback: {
+				self.selectedSize = size
 			}, showIndicator: true)
 		}
 		return OptionSelectorViewController(options: options)

@@ -18,3 +18,11 @@ enum Shape: String {
 		return [.box, .sphere, .cylinder, .cone, .torus]
 	}
 }
+enum Size: String {
+	case small = "Small"
+	case medium = "Medium"
+	case large = "Large"
+	static var all: [Size] {
+		return [.small, .medium, .large]
+	}
+}
