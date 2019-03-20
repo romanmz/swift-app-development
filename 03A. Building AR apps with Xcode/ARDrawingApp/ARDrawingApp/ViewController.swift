@@ -34,25 +34,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	// Manage AR session configuration
 	// ------------------------------
 	var planeNodes: [SCNNode] = []
-	var imageAnchors: [ARImageAnchor] = []
+	var imageAnchors: [String:ARImageAnchor] = [:]
 	func clearImageAnchors() {
-		for anchor in imageAnchors {
+		for (_, anchor) in imageAnchors {
 			sceneView.session.remove(anchor: anchor)
 		}
 		imageAnchors.removeAll()
 	}
 	var placedNodes: [SCNNode] = []
-	var sessionConfig: ARWorldTrackingConfiguration {
+	func resetSession() {
 		let config = ARWorldTrackingConfiguration()
 		setupPlaneDetection(config)
-		if currentMode == .image {
+		if currentMode == .image && selectedNode != nil {
 			setupImageDetection(config)
 		}
-		return config
-	}
-	func resetSession() {
 		let options: ARSession.RunOptions = []//[.resetTracking, .removeExistingAnchors]
-		sceneView.session.run(sessionConfig, options: options)
+		sceneView.session.run(config, options: options)
 	}
 	
 	
@@ -161,18 +158,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, OptionsViewController
 	}
 	func addPlane(to node: SCNNode, using anchor: ARImageAnchor) {
 		let detectedImage = anchor.referenceImage
+		let imageName = detectedImage.name ?? ""
 		let width = detectedImage.physicalSize.width
 		let height = detectedImage.physicalSize.height
 		let color = UIColor.red
 		let planeNode = createPlaneNode(width: width, height: height, color: color)
 		node.addChildNode(planeNode)
-		imageAnchors.append(anchor)
-		// add currently selected node
-		if currentMode == .image {
-			guard let selectedNode = selectedNode else { return }
-			selectedNode.simdTransform = matrix_identity_float4x4
-			addNodeToParent(selectedNode, parent: node)
+		if let oldAnchor = imageAnchors.updateValue(anchor, forKey: imageName) {
+			sceneView.session.remove(anchor: oldAnchor)
 		}
+		// add currently selected node
+		guard let selectedNode = selectedNode else { return }
+		selectedNode.simdTransform = matrix_identity_float4x4
+		addNodeToParent(selectedNode, parent: node)
 	}
 	
 	
