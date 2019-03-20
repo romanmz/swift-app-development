@@ -15,6 +15,7 @@ class OptionsViewController: UIViewController {
 	// ------------------------------
 	var selectedShape: Shape?
 	var selectedSize: Size?
+	var selectedColor: UIColor?
 	
 	
 	// Initialize
@@ -67,7 +68,20 @@ class OptionsViewController: UIViewController {
 		let options = Size.all.map { size in
 			return Option(title: size.rawValue, callback: {
 				self.selectedSize = size
+				self.nav?.pushViewController(self.colorPicker, animated: true)
 			}, showIndicator: true)
+		}
+		return OptionSelectorViewController(options: options)
+	}
+	
+	
+	// Color picker
+	// ------------------------------
+	private var colorPicker: UIViewController {
+		let options = Color.all.map { color in
+			return Option(title: color.rawValue, callback: {
+				self.selectedColor = color.value
+			})
 		}
 		return OptionSelectorViewController(options: options)
 	}
