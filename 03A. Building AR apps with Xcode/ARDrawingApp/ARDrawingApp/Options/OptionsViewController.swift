@@ -9,11 +9,25 @@
 import UIKit
 import SceneKit
 
+
+// Delegate
+// ------------------------------
+protocol OptionsViewControllerDelegate: class {
+	func objectSelected(node: SCNNode)
+	func planesVisibilityToggled()
+	func undoLastObject()
+	func resetScene()
+	func closeOptions()
+}
+
+
 class OptionsViewController: UIViewController {
 	
 	
 	// Properties
 	// ------------------------------
+	
+	// Object settings
 	var selectedShape: Shape = .box
 	var selectedSize: Size = .medium
 	var selectedColor: Color = .red
@@ -22,6 +36,8 @@ class OptionsViewController: UIViewController {
 		geometry.firstMaterial?.diffuse.contents = selectedColor.value
 		return SCNNode(geometry: geometry)
 	}
+	
+	// Delegate
 	weak var delegate: OptionsViewControllerDelegate?
 	
 	
@@ -30,9 +46,6 @@ class OptionsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupNavController()
-	}
-	override func viewWillLayoutSubviews() {
-		preferredContentSize = CGSize(width: 320, height: 600)
 	}
 	
 	
@@ -135,15 +148,4 @@ class OptionsViewController: UIViewController {
 		}
 		return OptionSelectorViewController(options: options)
 	}
-}
-
-
-// Delegate
-// ------------------------------
-protocol OptionsViewControllerDelegate: class {
-	func objectSelected(node: SCNNode)
-	func planesVisibilityToggled()
-	func undoLastObject()
-	func resetScene()
-	func closeOptions()
 }
