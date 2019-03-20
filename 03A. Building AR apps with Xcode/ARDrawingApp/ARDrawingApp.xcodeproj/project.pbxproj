@@ -16,6 +16,7 @@
 		30775F612241951300E81E2A /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F602241951300E81E2A /* OptionsViewController.swift */; };
 		30775F632241988E00E81E2A /* OptionSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775F622241988E00E81E2A /* OptionSelectorViewController.swift */; };
 		30A19B652241C068007A8C72 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A19B642241C068007A8C72 /* Types.swift */; };
+		30A19B672241D0F1007A8C72 /* models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A19B662241D0F1007A8C72 /* models.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		30775F602241951300E81E2A /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		30775F622241988E00E81E2A /* OptionSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectorViewController.swift; sourceTree = "<group>"; };
 		30A19B642241C068007A8C72 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Types.swift; path = ARDrawingApp/Types.swift; sourceTree = SOURCE_ROOT; };
+		30A19B662241D0F1007A8C72 /* models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = models.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				30772631223F161F00757CBB /* Assets.xcassets */,
 				30772633223F161F00757CBB /* LaunchScreen.storyboard */,
 				3077262E223F161E00757CBB /* Main.storyboard */,
+				30A19B662241D0F1007A8C72 /* models.scnassets */,
 			);
 			path = ARDrawingApp;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				30775F5F2241941B00E81E2A /* Options.storyboard in Resources */,
 				30772635223F161F00757CBB /* LaunchScreen.storyboard in Resources */,
 				30772632223F161F00757CBB /* Assets.xcassets in Resources */,
+				30A19B672241D0F1007A8C72 /* models.scnassets in Resources */,
 				30772630223F161E00757CBB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

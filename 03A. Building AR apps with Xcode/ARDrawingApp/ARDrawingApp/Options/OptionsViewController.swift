@@ -48,10 +48,10 @@ class OptionsViewController: UIViewController {
 	private var optionPicker: UIViewController {
 		return OptionSelectorViewController(options: [
 			Option(title: "Select Basic Shape", callback: { self.nav?.pushViewController(self.shapePicker, animated: true) }, showIndicator: true),
-			Option(title: "Select Scene File", callback: {}, showIndicator: true),
 			Option(title: "Toggle Planes Visibility", callback: {}),
 			Option(title: "Undo Last Shape", callback: {}),
 			Option(title: "Reset Scene", callback: {}),
+			Option(title: "Select Scene File", callback: { self.nav?.pushViewController(self.scenePicker, animated: true) }, showIndicator: true),
 		])
 	}
 	
@@ -89,6 +89,35 @@ class OptionsViewController: UIViewController {
 			return Option(title: color.rawValue, callback: {
 				self.selectedColor = color
 				self.delegate?.objectSelected(node: self.selectedNode)
+			})
+		}
+		return OptionSelectorViewController(options: options)
+	}
+	
+	
+	// Scene file picker
+	// ------------------------------
+	private var scenePicker: UIViewController {
+		
+		// Get all .scn files
+		let modelsFolder = "models.scnassets"
+		let scnFiles: [String] = {
+			let folderURL = Bundle.main.url(forResource: modelsFolder, withExtension: nil)!
+			let fileEnumerator = FileManager().enumerator(at: folderURL, includingPropertiesForKeys: [])!
+			return fileEnumerator.compactMap { fileItem in
+				guard let url = fileItem as? URL,
+					url.pathExtension == "scn" else { return nil }
+				return url.lastPathComponent
+			}
+		}()
+		
+		// Build options
+		let options: [Option] = scnFiles.compactMap { scnFile in
+			let scnFolder = scnFile.replacingOccurrences(of: ".scn", with: "")
+			let fullPath = "\(modelsFolder)/\(scnFolder)/\(scnFile)"
+			guard let scene = SCNScene(named: fullPath) else { return nil }
+			return Option(title: scnFile, callback: {
+				self.delegate?.objectSelected(node: scene.rootNode)
 			})
 		}
 		return OptionSelectorViewController(options: options)
