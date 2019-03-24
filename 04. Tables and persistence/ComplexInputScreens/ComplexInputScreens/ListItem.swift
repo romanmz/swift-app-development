@@ -23,9 +23,8 @@ struct ListItem {
 		return dateFormatter.string(from: self.date)
 	}
 }
-enum ListItemPriority: CustomStringConvertible {
+enum ListItemPriority: CustomStringConvertible, CaseIterable {
 	case low, medium, high
-	static let all: [ListItemPriority] = [.low, .medium, .high]
 	var description: String {
 		switch self {
 		case .low:

@@ -91,7 +91,7 @@ class OptionsViewController: UIViewController {
 	
 	// Shape picker
 	private var shapePicker: UIViewController {
-		let options = Shape.all.map { shape in
+		let options = Shape.allCases.map { shape in
 			return Option(title: shape.rawValue, callback: {
 				self.selectedShape = shape
 				self.navController.pushViewController(self.sizePicker, animated: true)
@@ -102,7 +102,7 @@ class OptionsViewController: UIViewController {
 	
 	// Size picker
 	private var sizePicker: UIViewController {
-		let options = Size.all.map { size in
+		let options = Size.allCases.map { size in
 			return Option(title: size.rawValue, callback: {
 				self.selectedSize = size
 				self.navController.pushViewController(self.colorPicker, animated: true)
@@ -113,7 +113,7 @@ class OptionsViewController: UIViewController {
 	
 	// Color picker
 	private var colorPicker: UIViewController {
-		let options = Color.all.map { color in
+		let options = Color.allCases.map { color in
 			return Option(title: color.rawValue, callback: {
 				self.selectedColor = color
 				self.delegate?.objectSelected(node: self.selectedNode)

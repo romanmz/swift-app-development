@@ -112,7 +112,7 @@ class ItemEditViewController: UITableViewController, UITextViewDelegate {
 	// ------------------------------
 	func populatePriorityOptions(on view: UIViewController) {
 		guard let selectView = view as? OptionSelectViewController else { return }
-		selectView.options = ListItemPriority.all
+		selectView.options = ListItemPriority.allCases
 		selectView.selectedOption = item.priority
 		selectView.navigationItem.title = "Item Priority"
 	}

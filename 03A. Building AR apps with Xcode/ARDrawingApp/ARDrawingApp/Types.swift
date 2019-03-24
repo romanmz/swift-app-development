@@ -13,7 +13,7 @@ import SceneKit
 
 // Shape
 // ------------------------------
-enum Shape: String {
+enum Shape: String, CaseIterable {
 	case box = "Box"
 	case sphere = "Sphere"
 	case cylinder = "Cylinder"
@@ -33,15 +33,12 @@ enum Shape: String {
 			return SCNTorus(ringRadius: size / 2, pipeRadius: size * 0.2)
 		}
 	}
-	static var all: [Shape] {
-		return [.box, .sphere, .cylinder, .cone, .torus]
-	}
 }
 
 
 // Size
 // ------------------------------
-enum Size: String {
+enum Size: String, CaseIterable {
 	case small = "Small"
 	case medium = "Medium"
 	case large = "Large"
@@ -55,15 +52,12 @@ enum Size: String {
 			return 0.3
 		}
 	}
-	static var all: [Size] {
-		return [.small, .medium, .large]
-	}
 }
 
 
 // Color
 // ------------------------------
-enum Color: String {
+enum Color: String, CaseIterable {
 	case red = "Red"
 	case yellow = "Yellow"
 	case orange = "Orange"
@@ -81,8 +75,5 @@ enum Color: String {
 		case .brown: return .brown
 		case .white: return .white
 		}
-	}
-	static var all: [Color] {
-		return [.red, .yellow, .orange, .green, .blue, .brown, .white]
 	}
 }
